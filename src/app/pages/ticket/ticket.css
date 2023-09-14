@@ -1,0 +1,18 @@
+.background-ticket-header{
+    background-color: #2395FF;
+}
+.button-ticket{
+    background-color: #2395FF;
+}
+.color-ticket{
+    color: #2395FF;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+
+@media (max-width: 640px) {
+    .background-ticket-header{height: 500px;}
+}
