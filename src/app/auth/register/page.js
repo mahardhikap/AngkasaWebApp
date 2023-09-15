@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import './register.css';
+import Link from 'next/link';
 
 export default function Register() {
   return (
@@ -46,19 +47,21 @@ export default function Register() {
                 placeholder="Password"
               />
             </div>
-            <button class="rounded-md color-button-register w-full p-4 text-white font-bold">
+            <button className="rounded-md color-button-register w-full p-4 text-white font-bold">
               Sign Up
             </button>
-            <div className='mt-2 mb-10'>
-              <input type="checkbox" class="default:ring-2" />
+            <div className="mt-2 mb-10">
+              <input type="checkbox" className="default:ring-2" />
               Accept terms and condition
             </div>
             <div className="border-t-2 my-5">
               <p className="text-center my-3">Already have an account?</p>
             </div>
-            <button className="rounded-md border-button-login border-solid border-2 w-full p-4 font-bold">
-              Sign in
-            </button>
+            <Link href='/auth/login'>
+              <button className="rounded-md border-button-login border-solid border-2 w-full p-4 font-bold">
+                Sign in
+              </button>
+            </Link>
           </div>
         </div>
       </div>

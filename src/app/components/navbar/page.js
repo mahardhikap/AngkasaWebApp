@@ -71,7 +71,7 @@ export default function Navbar() {
                 </Link>
               </div>
               <div>
-                <Link href='/auth/login'>
+                <Link href='/auth/register'>
                   <button className="py-3 px-5 rounded-lg text-white font-bold color-button-navbar sm:px-10 hover:bg-blue-900">
                     Sign In
                   </button>

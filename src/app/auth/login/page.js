@@ -6,6 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
+import { redirect } from 'next/navigation'
+
 
 export default function Login() {
   const [inputData, setInputData] = useState({
@@ -32,6 +35,9 @@ export default function Login() {
       console.log('ini data', data);
       if (response.ok) {
         toast.success(data.message);
+        setTimeout(()=>{
+          redirect('/pages/index')
+        }, 2000)
       } else {
         toast.error(data.message);
       }
