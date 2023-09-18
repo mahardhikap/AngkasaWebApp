@@ -57,21 +57,21 @@ export default function Navbar() {
                 />
               </div>
               <div>
-                <Link href="/pages/ticket">
+                <Link href="/ticket">
                   <div className="font-medium hover:text-blue-900 cursor-pointer hover:font-bold">
                     Find Ticket
                   </div>
                 </Link>
               </div>
               <div>
-                <Link href="/pages/booking">
+                <Link href="/booking">
                   <div className="font-medium hover:text-blue-900 cursor-pointer hover:font-bold">
                     My Booking
                   </div>
                 </Link>
               </div>
               <div>
-                <Link href='/auth/register'>
+                <Link href='/register'>
                   <button className="py-3 px-5 rounded-lg text-white font-bold color-button-navbar sm:px-10 hover:bg-blue-900">
                     Sign In
                   </button>

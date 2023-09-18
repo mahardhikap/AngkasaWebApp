@@ -57,7 +57,7 @@ export default function Register() {
             <div className="border-t-2 my-5">
               <p className="text-center my-3">Already have an account?</p>
             </div>
-            <Link href='/auth/login'>
+            <Link href='/login'>
               <button className="rounded-md border-button-login border-solid border-2 w-full p-4 font-bold">
                 Sign in
               </button>

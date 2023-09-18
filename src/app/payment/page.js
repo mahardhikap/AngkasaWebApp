@@ -2,7 +2,7 @@ import './payment.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/components/navbar/page';
-import Footer from '@/app/components/footer/page';
+import Footer from '@/app/footer/page';
 
 export default function Payment() {
   return (

@@ -9,8 +9,8 @@ import {
   faChevronRight,
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
-import Navbar from '@/app/components/navbar/page';
-import Footer from '@/app/components/footer/page';
+import Navbar from '@/app/navbar/page';
+import Footer from '@/app/footer/page';
 import Link from 'next/link';
 
 export default function Booking() {
@@ -55,7 +55,7 @@ export default function Booking() {
                     <div>$ 1,440.2</div>
                   </div>
                 </div>
-                <Link href="/pages/profile">
+                <Link href="/profile">
                   <div className="flex flex-row items-center justify-between mb-4 hover:text-blue-900 cursor-pointer">
                     <div className="flex flex-row gap-3 items-center">
                       <div>
@@ -168,7 +168,7 @@ export default function Booking() {
                     </div>
                   </div>
                   <div className="flex justify-end items-center">
-                    <Link href="/pages/booking-pass">
+                    <Link href="/booking-pass">
                       <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900">
                         <div>View Details</div>
                         <div>

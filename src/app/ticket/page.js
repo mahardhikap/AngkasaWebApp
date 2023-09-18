@@ -3,8 +3,8 @@ import './ticket.css';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import Navbar from '@/app/components/navbar/page';
-import Footer from '@/app/components/footer/page';
+import Navbar from '@/app/navbar/page';
+import Footer from '@/app/footer/page';
 
 export default function Ticket() {
   const [rangeValue, setRangeValue] = useState([2, 20]);
@@ -17,38 +17,32 @@ export default function Ticket() {
   return (
     <>
       <Navbar />
-      <div className="bg-slate-100 container mx-auto w-full">
-        <div className="background-ticket-header container w-full mx-auto rounded-b-3xl h-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 relative">
-            <div>
-              <img src="/logo_plane_blue.png" />
-              <div className="flex absolute top-14 left-0 sm:left-20 md:left-32">
-                <img src="/logo_plane_white.png" className="absolute" />
-                <div className="ms-20 grid grid-cols-1 sm:grid-cols-3 gap-10 items-center">
-                  <div className="col-span-1 flex flex-col items-center text-white">
-                    <div>From</div>
-                    <div className="font-semibold">Indonesia(IDN)</div>
-                    <div>Monday, 20 July</div>
-                  </div>
-                  <div className="col-span-1 flex flex-col items-center text-white">
-                    <div>Passenger</div>
-                    <div>
-                      <img src="/arrowdestination.svg" />
-                    </div>
-                    <div>6 Passengers</div>
-                  </div>
-                  <div className="col-span-1 flex flex-col items-center text-white">
-                    <div>To</div>
-                    <div className="font-semibold">Japan(JPN)</div>
-                    <div>Economy</div>
-                  </div>
+      <div className="bg-slate-100 container mx-auto">
+        <div className="background-ticket-header container w-full mx-auto rounded-b-3xl relative">
+          <img src="/logo_plane_blue.png" className="absolute z-0" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 py-10 z-10 w-full lg:w-10/12 container mx-auto text-white">
+            <div className="z-10 p-3 grid grid-cols-3">
+              <div className="col-span-3">
+                <div className="flex justify-between font-medium">
+                  <div>From</div>
+                  <div>To</div>
                 </div>
               </div>
-            </div>
-            <div className="flex justify-end items-center text-white">
-              <div className="p-5 font-semibold hidden sm:block">
-                Change Search
+              <div>
+                <div className='font-extrabold'>Medan (IDN)</div>
+                <div>Monday, 20 July 20</div>
               </div>
+              <div className='flex flex-col justify-center items-center'>
+                <div><img src='/arrowdestination.svg'/></div>
+                <div>6 Passenger</div>
+              </div>
+              <div className='text-right'>
+                <div className='font-extrabold'>Tokyo (JPN)</div>
+                <div>Economy</div>
+              </div>
+            </div>
+            <div className="flex justify-end items-center justify-center sm:justify-end p-3">
+              <div className='font-bold'>Change Search</div>
             </div>
           </div>
         </div>

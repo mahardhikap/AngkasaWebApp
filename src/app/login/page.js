@@ -1,4 +1,5 @@
 'use client';
+import axios from 'axios'; // Import axios library
 import Image from 'next/image';
 import './login.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,11 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-import { redirect } from 'next/navigation'
-
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const router = useRouter();
   const [inputData, setInputData] = useState({
     email: '',
     password: '',
@@ -19,30 +19,24 @@ export default function Login() {
 
   const postData = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch(
-        `https://easy-lime-seal-toga.cyclic.app/users/login`,
+      const response = await axios.post(
+        'https://easy-lime-seal-toga.cyclic.app/auth/login',
+        inputData,
         {
-          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json', // Set the Content-Type header
           },
-          body: JSON.stringify(inputData),
         }
       );
-      const data = await response.json();
-      console.log('ini data', data);
-      if (response.ok) {
-        toast.success(data.message);
-        setTimeout(()=>{
-          redirect('/pages/index')
-        }, 2000)
-      } else {
-        toast.error(data.message);
-      }
+      console.log('Data:', response.data);
+      toast.success('Login success');
+      setTimeout(()=>{
+        router.push('/');
+      },2000)
     } catch (error) {
-      console.log('Error:', error);
+      console.error('Error:', error);
+      toast.error('Login failed');
     }
   };
 

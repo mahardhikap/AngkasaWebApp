@@ -14,5 +14,5 @@ hr {
 
 
 @media (max-width: 640px) {
-    .background-ticket-header{height: 500px;}
+    .background-ticket-header{height: 250px;}
 }

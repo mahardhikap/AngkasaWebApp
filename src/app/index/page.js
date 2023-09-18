@@ -3,8 +3,8 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import Navbar from '@/app/components/navbar/page';
-import Footer from '@/app/components/footer/page';
+import Navbar from '@/app/navbar/page';
+import Footer from '@/app/footer/page';
 import './index.css';
 import Image from 'next/image';
 
