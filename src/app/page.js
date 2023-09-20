@@ -26,14 +26,14 @@ export default function MainMenu() {
             src="/image_4.png"
             width={500}
             height={500}
-            className="w-2/4 left-[-100px] absolute z-[-10]"
+            className="w-2/4 left-[-120px] absolute z-[-10]"
             alt='left'
           />
           <Image
             src="/Group_55.png"
             width={500}
             height={500}
-            className="w-1/4 absolute right-[-100px] hidden sm:block top-[130px] sm:top-[150px] md:top-[150px] z-0"
+            className="w-1/4 absolute right-[-120px] hidden sm:block top-[130px] sm:top-[150px] md:top-[150px] z-0"
             alt='blue'
           />
           <Image

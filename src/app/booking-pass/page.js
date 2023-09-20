@@ -6,7 +6,9 @@ import Footer from '@/app/footer/page';
 export default function BookingPass() {
   return (
     <>
-    <Navbar/>
+      <div className='w-11/12 container mx-auto'>
+        <Navbar />
+      </div>
       <div className="bg-slate-200">
         <div className="container mx-auto w-3/4 py-10">
           <div className="bg-white rounded-xl">
@@ -26,7 +28,7 @@ export default function BookingPass() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

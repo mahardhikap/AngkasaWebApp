@@ -1,13 +1,16 @@
 import './payment.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
-import Navbar from '@/app/components/navbar/page';
+import Navbar from '@/app/navbar/page';
 import Footer from '@/app/footer/page';
+import Link from 'next/link';
 
 export default function Payment() {
   return (
     <>
-    <Navbar/>
+      <div className="container w-11/12 mx-auto">
+        <Navbar />
+      </div>
       <div className="container mx-auto bg-slate-100">
         <div className="w-11/12 sm:w-10/12 md:w-3/4 mx-auto py-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-2xl">
@@ -15,12 +18,16 @@ export default function Payment() {
               <div className="p-3 font-bold">Payment Method</div>
               <div className="flex flex-row items-center justify-between p-3">
                 <div>Paypal</div>
-                <div><img src='/paypal.webp' width={40}/></div>
+                <div>
+                  <img src="/paypal.webp" width={40} />
+                </div>
               </div>
               <div className="flex flex-row justify-between p-3">
                 <div>Credit Card</div>
                 <div className="flex flex-row items-center">
-                  <div><img src='/paymentgate.png' width={150}/></div>
+                  <div>
+                    <img src="/paymentgate.png" width={150} />
+                  </div>
                 </div>
               </div>
               <div className="p-3">
@@ -40,11 +47,16 @@ export default function Payment() {
                 </div>
                 <div className="ps-2">
                   <label>CVC/CVV</label>
-                  <input placeholder="000" className="w-full p-3 rounded-lg border-2" />
+                  <input
+                    placeholder="000"
+                    className="w-full p-3 rounded-lg border-2"
+                  />
                 </div>
               </div>
               <div className="p-3 flex flex-rows items-center gap-3">
-                <div><FontAwesomeIcon icon={faLock} width={15}/></div>
+                <div>
+                  <FontAwesomeIcon icon={faLock} width={15} />
+                </div>
                 <div>Your transaction is secured with ssl certificate</div>
               </div>
             </div>
@@ -53,9 +65,14 @@ export default function Payment() {
               <div className="p-3 flex flex-row justify-between">
                 <div>
                   <div>Pro(Billed Monthly)</div>
-                  <div className='underline custom-color text-sm'>Save 20% with annual billing</div>
+                  <div className="underline custom-color text-sm">
+                    Save 20% with annual billing
+                  </div>
                 </div>
-                <div><span className='font-bold'>$9.99</span>/<span className='text-xs'>month</span></div>
+                <div>
+                  <span className="font-bold">$9.99</span>/
+                  <span className="text-xs">month</span>
+                </div>
               </div>
               <div className="p-3">
                 <div className="flex flex-row justify-between">
@@ -75,9 +92,11 @@ export default function Payment() {
                 <div>After 30 days $9.59</div>
               </div>
               <div className="p-3">
-                <button className="p-3 w-full custom-background rounded-lg text-white hover:bg-blue-600">
-                  Try it free for 30 days
-                </button>
+                <Link href='/booking'>
+                  <button className="p-3 w-full custom-background rounded-lg text-white hover:bg-blue-600">
+                    Try it free for 30 days
+                  </button>
+                </Link>
                 <div className="custom-color text-center py-2">
                   Have a promo code?
                 </div>
@@ -86,7 +105,7 @@ export default function Payment() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

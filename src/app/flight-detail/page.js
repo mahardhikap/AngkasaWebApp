@@ -5,14 +5,16 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
-import Navbar from '@/app/components/navbar/page';
+import Navbar from '@/app/navbar/page';
 import Footer from '@/app/footer/page';
-
+import Link from 'next/link';
 
 export default function FlightDetail() {
   return (
     <>
-    <Navbar/>
+      <div className="container w-11/12 mx-auto">
+        <Navbar />
+      </div>
       <div className="bg-slate-100">
         <div className="custom-background container w-full mx-auto rounded-b-3xl h-auto">
           <img src="/logo_plane_blue.png" />
@@ -192,12 +194,14 @@ export default function FlightDetail() {
           </div>
         </div>
         <div className="flex items-center justify-center py-20 bg-slate-100">
-          <button className="py-3 px-16 custom-background rounded-xl font-bold text-white">
-            Proceed to Payment
-          </button>
+          <Link href="/payment">
+            <button className="py-3 px-16 custom-background rounded-xl font-bold text-white">
+              Proceed to Payment
+            </button>
+          </Link>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

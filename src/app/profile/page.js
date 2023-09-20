@@ -16,7 +16,9 @@ import Link from 'next/link';
 export default function Profile() {
   return (
     <>
-      <Navbar />
+      <div className='w-11/12 container mx-auto'>
+        <Navbar />
+      </div>
       <div className="bg-slate-100 py-20">
         <div className="w-11/12 xl:w-10/12 container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4">
@@ -88,7 +90,7 @@ export default function Profile() {
                     <FontAwesomeIcon icon={faChevronRight} width={10} />
                   </div>
                 </div>
-                <Link href='/pages/index'>
+                <Link href="/pages/index">
                   <div className="flex flex-row items-center justify-between mb-4 hover:text-blue-900">
                     <div className="flex flex-row gap-3 items-center">
                       <div>

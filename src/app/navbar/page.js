@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './navbar.css';
 import Link from 'next/link';
+import Modal from '../modal/page';
 
 export default function Navbar() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -13,14 +14,14 @@ export default function Navbar() {
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900 mx-auto">
-        <div className="w-full container flex flex-wrap items-center justify-between mx-auto py-4">
-          <a href="#" className="flex items-center">
+        <div className="w-full container flex flex-wrap items-center justify-between gap-5 xl:gap-0 mx-auto py-4">
+          <a href="/" className="flex items-center">
             <img src="/Group_28.svg" className="h-8 mr-3" alt="Flowbite Logo" />
           </a>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="navbar-default"
             aria-expanded={menuVisible}
             onClick={toggleMenu}
@@ -44,12 +45,12 @@ export default function Navbar() {
           <div
             className={`${
               menuVisible ? 'block' : 'hidden'
-            } w-full md:flex md:w-auto`}
+            } w-full lg:flex lg:w-auto`}
             id="navbar-default"
           >
-            <div className="flex flex-col md:flex-row items-center gap-10 mt-5 md:mt-0">
+            <div className="flex flex-col lg:flex-row items-center gap-10 mt-5 md:mt-0">
               {/* Use responsive classes to control width */}
-              <div className="p-3 color-search-navbar rounded-lg relative w-full md:w-96 md:w-auto">
+              <div className="p-3 color-search-navbar rounded-lg relative w-full sm:w-96 sm:w-auto">
                 <img src="/search.svg" className="absolute left-0 ps-3" />
                 <input
                   placeholder="Where you want to go?"
@@ -57,15 +58,18 @@ export default function Navbar() {
                 />
               </div>
               <div>
-                <Link href="/ticket">
-                  <div className="font-medium hover:text-blue-900 cursor-pointer hover:font-bold">
+                <Modal
+                buttonLabel={'Find Ticket'}
+                />
+                {/* <Link href="/ticket">
+                  <div className="font-bold hover:text-blue-900 cursor-pointer">
                     Find Ticket
                   </div>
-                </Link>
+                </Link> */}
               </div>
               <div>
                 <Link href="/booking">
-                  <div className="font-medium hover:text-blue-900 cursor-pointer hover:font-bold">
+                  <div className="font-bold hover:text-blue-900 cursor-pointer">
                     My Booking
                   </div>
                 </Link>

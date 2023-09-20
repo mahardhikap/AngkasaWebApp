@@ -16,7 +16,9 @@ import Link from 'next/link';
 export default function Booking() {
   return (
     <>
-      <Navbar />
+      <div className="container w-10/12 mx-auto">
+        <Navbar />
+      </div>
       <div className="bg-slate-100 py-20">
         <div className="w-11/12 xl:w-10/12 container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4">
