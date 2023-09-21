@@ -21,7 +21,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'https://easy-lime-seal-toga.cyclic.app/auth/login',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
         inputData,
         {
           headers: {
@@ -30,6 +30,7 @@ export default function Login() {
         }
       );
       console.log('Data:', response.data);
+      localStorage.setItem("access_token", response.data.data.access_token)
       toast.success('Login success');
       setTimeout(()=>{
         router.push('/');
@@ -68,6 +69,7 @@ export default function Login() {
             width={200}
             height={100}
             className="hidden sm:inline md:inline lg:inlin mt-2"
+            alt='angkasa-logo-small'
           />
           <div className="my-10 sm:my-40">
             <form onSubmit={postData}>

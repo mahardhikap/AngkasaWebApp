@@ -1,19 +1,38 @@
+'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/navbar/page';
+import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import './index/index.css';
 import Image from 'next/image';
+import React, {useEffect, useState} from 'react';
 
 export default function MainMenu() {
+  const [token, setToken] = useState(null)
+  
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem("access_token"))
+    }
+  }, []);
+
+  const NavbarHandle = () => {
+    if(!token){
+      return <Navbar/>
+    } else {
+      return <LoginNavbar/>
+    }
+  }
+
   return (
     <>
       <div className="mb-56 relative container w-10/12 mx-auto">
       <div className='z-10'>
-        <Navbar />
+        {NavbarHandle()}
       </div>
         <div className="mt-20 mb-10 z-10">
           <h1 className="font-semibold text-5xl z-10">
