@@ -1,6 +1,6 @@
 'use client';
 import './ticket.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronDown,
@@ -8,6 +8,7 @@ import {
   faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/navbar/page';
+import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
 
@@ -19,6 +20,21 @@ export default function Ticket() {
   const [arrivedOpen, setArrivedOpen] = useState(false);
   const [airlinesOpen, setAirlinesOpen] = useState(false);
   const [ticketOpen, setTicketOpen] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem('access_token'));
+    }
+  }, []);
+
+  const NavbarHandle = () => {
+    if (!token) {
+      return <Navbar />;
+    } else {
+      return <LoginNavbar />;
+    }
+  };
 
   const transitToggle = () => {
     setTransitOpen(!transitOpen);
@@ -46,8 +62,8 @@ export default function Ticket() {
 
   return (
     <>
-      <div className="w-10/12 container mx-auto">
-        <Navbar />
+      <div className="w-11/12 container mx-auto">
+        {NavbarHandle()}
       </div>
       <div className="bg-slate-100 container mx-auto">
         <div className="background-ticket-header container w-full mx-auto rounded-b-3xl relative">

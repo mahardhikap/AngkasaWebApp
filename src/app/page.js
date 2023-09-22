@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronRight,
@@ -9,34 +9,33 @@ import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import './index/index.css';
 import Image from 'next/image';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function MainMenu() {
-  const [token, setToken] = useState(null)
-  
-  useEffect(()=>{
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      setToken(localStorage.getItem("access_token"))
+      setToken(localStorage.getItem('access_token'));
     }
   }, []);
 
   const NavbarHandle = () => {
-    if(!token){
-      return <Navbar/>
+    if (!token) {
+      return <Navbar />;
     } else {
-      return <LoginNavbar/>
+      return <LoginNavbar />;
     }
-  }
+  };
 
   return (
     <>
+      <div className="z-10 w-11/12 container mx-auto">{NavbarHandle()}</div>
       <div className="mb-56 relative container w-10/12 mx-auto">
-      <div className='z-10'>
-        {NavbarHandle()}
-      </div>
         <div className="mt-20 mb-10 z-10">
           <h1 className="font-semibold text-5xl z-10">
-            Find Your <span className="text-special-color z-10 w-1/3">Flight</span>
+            Find Your{' '}
+            <span className="text-special-color z-10 w-1/3">Flight</span>
           </h1>
           <p>and explore the world with us</p>
         </div>
@@ -46,21 +45,21 @@ export default function MainMenu() {
             width={500}
             height={500}
             className="w-2/4 left-[-120px] absolute z-[-10]"
-            alt='left'
+            alt="left"
           />
           <Image
             src="/Group_55.png"
             width={500}
             height={500}
             className="w-1/4 absolute right-[-120px] hidden sm:block top-[130px] sm:top-[150px] md:top-[150px] z-0"
-            alt='blue'
+            alt="blue"
           />
           <Image
             src="/vector_6.png"
             width={500}
             height={500}
             className="w-1/4 absolute right-0 md:bottom-[-300px] lg:bottom-[-400px] xl:bottom-[-550px] 2xl:w-1/6 z-[-10]"
-            alt='right'
+            alt="right"
           />
         </div>
       </div>
@@ -80,7 +79,12 @@ export default function MainMenu() {
                   </p>
                 </div>
               </div>
-              <img className="w-full rounded-2xl" src="/japan.png" alt="Japan" style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}/>
+              <img
+                className="w-full rounded-2xl"
+                src="/japan.png"
+                alt="Japan"
+                style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
+              />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
               <div className="grid grid-cols-2 absolute bottom-0">
                 <p className="p-5 text-white">
@@ -103,7 +107,12 @@ export default function MainMenu() {
                   </p>
                 </div>
               </div>
-              <img className="w-full rounded-2xl" src="/spain.png" alt="Japan" style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}/>
+              <img
+                className="w-full rounded-2xl"
+                src="/spain.png"
+                alt="Japan"
+                style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
+              />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
               <div className="grid grid-cols-2 absolute bottom-0">
                 <p className="p-5 text-white">
@@ -126,7 +135,12 @@ export default function MainMenu() {
                   </p>
                 </div>
               </div>
-              <img className="w-full rounded-2xl" src="/japan.png" alt="Japan" style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}/>
+              <img
+                className="w-full rounded-2xl"
+                src="/japan.png"
+                alt="Japan"
+                style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
+              />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
               <div className="grid grid-cols-2 absolute bottom-0">
                 <p className="p-5 text-white">
@@ -149,7 +163,12 @@ export default function MainMenu() {
                   </p>
                 </div>
               </div>
-              <img className="w-full rounded-2xl" src="/spain.png" alt="Japan" style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}/>
+              <img
+                className="w-full rounded-2xl"
+                src="/spain.png"
+                alt="Japan"
+                style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
+              />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
               <div className="grid grid-cols-2 absolute bottom-0">
                 <p className="p-5 text-white">
@@ -164,8 +183,7 @@ export default function MainMenu() {
                 </div>
               </div>
             </div>
-           
-            
+
             <div className="relative">
               <div className="w-3/5 absolute text-center z-10">
                 <div className="p-2">
@@ -174,7 +192,12 @@ export default function MainMenu() {
                   </p>
                 </div>
               </div>
-              <img className="w-full rounded-2xl" src="/japan.png" alt="Japan" style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}/>
+              <img
+                className="w-full rounded-2xl"
+                src="/japan.png"
+                alt="Japan"
+                style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
+              />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
               <div className="grid grid-cols-2 absolute bottom-0">
                 <p className="p-5 text-white">
@@ -213,7 +236,9 @@ export default function MainMenu() {
               <div className="rounded-full border-white border-solid border-4 p-2">
                 <img className="rounded-full" src="/singapore.png" />
               </div>
-              <p className="text-center mt-3 text-white font-medium">Singapore</p>
+              <p className="text-center mt-3 text-white font-medium">
+                Singapore
+              </p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
@@ -242,8 +267,8 @@ export default function MainMenu() {
           />
         </div>
       </div>
-      <div className='mt-40'>
-      <Footer/>
+      <div className="mt-40">
+        <Footer />
       </div>
     </>
   );

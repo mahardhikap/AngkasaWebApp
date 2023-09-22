@@ -15,9 +15,9 @@ export default function Navbar() {
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900 mx-auto">
         <div className="w-full container flex flex-wrap items-center justify-between gap-5 xl:gap-0 mx-auto py-4">
-          <a href="/" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img src="/Group_28.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-          </a>
+          </Link>
           <button
             data-collapse-toggle="navbar-default"
             type="button"

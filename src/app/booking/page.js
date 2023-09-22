@@ -1,3 +1,4 @@
+'use client'
 import './booking.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,14 +11,33 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/navbar/page';
+import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
+import React, {useEffect, useState} from 'react';
 
 export default function Booking() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem('access_token'));
+    }
+  }, []);
+
+  const NavbarHandle = () => {
+    if (!token) {
+      return <Navbar />;
+    } else {
+      return <LoginNavbar />;
+    }
+  };
+
+
   return (
     <>
-      <div className="container w-10/12 mx-auto">
-        <Navbar />
+      <div className="container w-11/12 mx-auto">
+        {NavbarHandle()}
       </div>
       <div className="bg-slate-100 py-20">
         <div className="w-11/12 xl:w-10/12 container mx-auto">

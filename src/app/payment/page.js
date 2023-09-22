@@ -1,15 +1,35 @@
+'use client'
 import './payment.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/navbar/page';
+import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
+import React, {useState, useEffect} from 'react';
 
 export default function Payment() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem('access_token'));
+    }
+  }, []);
+
+  const NavbarHandle = () => {
+    if (!token) {
+      return <Navbar />;
+    } else {
+      return <LoginNavbar />;
+    }
+  };
+
+
   return (
     <>
       <div className="container w-11/12 mx-auto">
-        <Navbar />
+        {NavbarHandle()}
       </div>
       <div className="container mx-auto bg-slate-100">
         <div className="w-11/12 sm:w-10/12 md:w-3/4 mx-auto py-20">

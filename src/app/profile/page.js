@@ -1,3 +1,4 @@
+'use client';
 import './profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,15 +11,42 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/navbar/page';
+import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Profile() {
+  const router = useRouter();
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem('access_token'));
+    }
+  }, []);
+
+  const NavbarHandle = () => {
+    if (!token) {
+      return <Navbar />;
+    } else {
+      return <LoginNavbar />;
+    }
+  };
+
+  const LogoutHandle = () => {
+    if (token) {
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+      return localStorage.clear();
+    }
+  };
+
   return (
     <>
-      <div className='w-11/12 container mx-auto'>
-        <Navbar />
-      </div>
+      <div className="w-11/12 container mx-auto">{NavbarHandle()}</div>
       <div className="bg-slate-100 py-20">
         <div className="w-11/12 xl:w-10/12 container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4">
@@ -90,19 +118,17 @@ export default function Profile() {
                     <FontAwesomeIcon icon={faChevronRight} width={10} />
                   </div>
                 </div>
-                <Link href="/pages/index">
-                  <div className="flex flex-row items-center justify-between mb-4 hover:text-blue-900">
-                    <div className="flex flex-row gap-3 items-center">
-                      <div>
-                        <FontAwesomeIcon icon={faRightFromBracket} width={20} />
-                      </div>
-                      <div>Logout</div>
-                    </div>
+                <div className="flex flex-row items-center justify-between mb-4 hover:text-blue-900 cursor-pointer" onClick={() => LogoutHandle()}>
+                  <div className="flex flex-row gap-3 items-center">
                     <div>
-                      <FontAwesomeIcon icon={faChevronRight} width={10} />
+                      <FontAwesomeIcon icon={faRightFromBracket} width={20} />
                     </div>
+                    <div>Logout</div>
                   </div>
-                </Link>
+                  <div>
+                    <FontAwesomeIcon icon={faChevronRight} width={10} />
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-span-3 p-2 ">

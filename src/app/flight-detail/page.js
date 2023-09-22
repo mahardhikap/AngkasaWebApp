@@ -1,3 +1,4 @@
+'use client'
 import './flight-detail.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,14 +7,33 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import Navbar from '@/app/navbar/page';
+import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
+import React, {useState, useEffect} from 'react';
 
 export default function FlightDetail() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem('access_token'));
+    }
+  }, []);
+
+  const NavbarHandle = () => {
+    if (!token) {
+      return <Navbar />;
+    } else {
+      return <LoginNavbar />;
+    }
+  };
+
+
   return (
     <>
       <div className="container w-11/12 mx-auto">
-        <Navbar />
+        {NavbarHandle()}
       </div>
       <div className="bg-slate-100">
         <div className="custom-background container w-full mx-auto rounded-b-3xl h-auto">
