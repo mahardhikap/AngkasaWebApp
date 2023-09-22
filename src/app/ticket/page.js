@@ -105,7 +105,7 @@ export default function Ticket() {
                 <div>Reset</div>
               </div>
               <div className="grid grid-cols-3 gap-2 mt-4 rounded-lg bg-white p-3">
-                <div className="col-span-3">
+                <div className="col-span-3 cursor-pointer">
                   <details>
                     <summary
                       className="mb-2 font-bold flex justify-between items-center"

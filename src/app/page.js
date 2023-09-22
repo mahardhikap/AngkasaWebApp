@@ -7,7 +7,7 @@ import {
 import Navbar from '@/app/navbar/page';
 import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
-import './index/index.css';
+import './homepage/index.css';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
