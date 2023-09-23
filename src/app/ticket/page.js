@@ -11,6 +11,9 @@ import Navbar from '@/app/navbar/page';
 import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Ticket() {
   const [rangeValue, setRangeValue] = useState([2, 20]);
@@ -21,12 +24,31 @@ export default function Ticket() {
   const [airlinesOpen, setAirlinesOpen] = useState(false);
   const [ticketOpen, setTicketOpen] = useState(false);
   const [token, setToken] = useState(null);
+  const [data, setData] = useState(null);
+  const facilitiesData = [
+    { name: 'baggage', image: '/logo_bag.svg' },
+    { name: 'meal', image: '/logo_food.svg' },
+    { name: 'wifi', image: '/logo_wifi.svg' },
+  ];
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setToken(localStorage.getItem('access_token'));
+  const getFlightMain = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight`,
+        {
+          headers: {
+            'Content-Type': 'application/json', // Set the Content-Type header
+          },
+        }
+      );
+      setData(response.data.data);
+      console.log('Data:', response.data);
+      toast.success('Get flight main success!');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Get flight main failed');
     }
-  }, []);
+  };
 
   const NavbarHandle = () => {
     if (!token) {
@@ -35,6 +57,13 @@ export default function Ticket() {
       return <LoginNavbar />;
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem('access_token'));
+    }
+    getFlightMain();
+  }, []);
 
   const transitToggle = () => {
     setTransitOpen(!transitOpen);
@@ -62,9 +91,7 @@ export default function Ticket() {
 
   return (
     <>
-      <div className="w-11/12 container mx-auto">
-        {NavbarHandle()}
-      </div>
+      <div className="w-11/12 container mx-auto">{NavbarHandle()}</div>
       <div className="bg-slate-100 container mx-auto">
         <div className="background-ticket-header container w-full mx-auto rounded-b-3xl relative">
           <img src="/logo_plane_blue.png" className="absolute z-0" />
@@ -283,336 +310,93 @@ export default function Ticket() {
             </div>
             <div className="col-span-3 px-2">
               <div className="font-bold flex justify-between mt-10">
-                <Link href='flight-detail'>
+                <Link href="flight-detail">
                   <div>Select Ticket</div>
                 </Link>
                 <div>Sort by</div>
               </div>
               <section className="overflow-auto">
-                <div className="bg-white rounded-xl p-3 mt-4">
-                  <div className="mt-5 flex flex-row items-center gap-x-3">
-                    <img src="/logo_garuda.png" alt="Airplane" />
-                    <p>Garuda Indonesia</p>
-                  </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                    <div className="col-span-1 flex flex-col">
-                      <div className="flex flex-row justify-between">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">IDN</div>
-                          <div>12:33</div>
+                {data?.map((item) => {
+                  return (
+                    <>
+                      <div className="bg-white rounded-xl p-3 mt-4">
+                        <div className="mt-5 flex flex-row items-center gap-x-3">
+                          <img
+                            src={item.photo}
+                            alt="Airplane"
+                            className="w-6/12 md:w-3/12"
+                          />
+                          <p>{item.name}</p>
                         </div>
-                        <div>
-                          <img src="/small_plane_logo.svg" />
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">JPN</div>
-                          <div>15:21</div>
-                        </div>
-                      </div>
-                      <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                        <div className="font-extrabold">View Detail</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={15} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="text-center">3 hours 11 minutes</div>
-                      <div>(1 transit)</div>
-                    </div>
-                    <div className="col-span-1 flex flex-row justify-evenly items-center">
-                      <div>
-                        <img src="/logo_bag.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_food.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_wifi.svg" />
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="font-bold">
-                        <span className="color-ticket">$214,00</span>/pax
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-3 mt-4">
-                  <div className="mt-5 flex flex-row items-center gap-x-3">
-                    <img src="/logo_garuda.png" alt="Airplane" />
-                    <p>Garuda Indonesia</p>
-                  </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                    <div className="col-span-1 flex flex-col">
-                      <div className="flex flex-row justify-between">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">IDN</div>
-                          <div>12:33</div>
-                        </div>
-                        <div>
-                          <img src="/small_plane_logo.svg" />
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">JPN</div>
-                          <div>15:21</div>
-                        </div>
-                      </div>
-                      <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                        <div className="font-extrabold">View Detail</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={15} />
+                        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
+                          <div className="col-span-1 flex flex-col">
+                            <div className="flex flex-row justify-between">
+                              <div className="flex flex-col items-center">
+                                <div className="font-bold">
+                                  {item.from.code}
+                                </div>
+                                <div>{new Date(`${item.takeoff}`).toLocaleString('en-US', { timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit'})}</div>
+                              </div>
+                              <div>
+                                <img src="/small_plane_logo.svg" />
+                              </div>
+                              <div className="flex flex-col items-center">
+                                <div className="font-bold">{item.to.code}</div>
+                                <div>{new Date(`${item.landing}`).toLocaleString('en-US', { timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit'})}</div>
+                              </div>
+                            </div>
+                            <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
+                              <div className="font-extrabold">View Detail</div>
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={faChevronDown}
+                                  width={15}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-span-1 flex flex-col items-center justify-center">
+                            <div className="text-center">
+                              {item.interval_time}
+                            </div>
+                            <div>(1 transit)</div>
+                          </div>
+                          <div className="col-span-1 flex flex-row justify-evenly items-center">
+                            {item.facilities.map((facility) => {
+                              const matchingFacility = facilitiesData.find(
+                                (data) => data.name === facility
+                              );
+
+                              return (
+                                <div key={facility}>
+                                  {matchingFacility && (
+                                    <img
+                                      src={matchingFacility.image}
+                                      alt={facility}
+                                    />
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <div className="col-span-1 flex flex-col items-center justify-center">
+                            <div className="font-bold">
+                              <span className="color-ticket">
+                                ${item.price}
+                              </span>
+                              /pax
+                            </div>
+                          </div>
+                          <div className="col-span-1 flex flex-col items-center justify-center">
+                            <button className="px-10 py-3 text-white button-ticket rounded-xl">
+                              Select
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="text-center">3 hours 11 minutes</div>
-                      <div>(1 transit)</div>
-                    </div>
-                    <div className="col-span-1 flex flex-row justify-evenly items-center">
-                      <div>
-                        <img src="/logo_bag.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_food.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_wifi.svg" />
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="font-bold">
-                        <span className="color-ticket">$214,00</span>/pax
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-3 mt-4">
-                  <div className="mt-5 flex flex-row items-center gap-x-3">
-                    <img src="/logo_garuda.png" alt="Airplane" />
-                    <p>Garuda Indonesia</p>
-                  </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                    <div className="col-span-1 flex flex-col">
-                      <div className="flex flex-row justify-between">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">IDN</div>
-                          <div>12:33</div>
-                        </div>
-                        <div>
-                          <img src="/small_plane_logo.svg" />
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">JPN</div>
-                          <div>15:21</div>
-                        </div>
-                      </div>
-                      <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                        <div className="font-extrabold">View Detail</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={15} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="text-center">3 hours 11 minutes</div>
-                      <div>(1 transit)</div>
-                    </div>
-                    <div className="col-span-1 flex flex-row justify-evenly items-center">
-                      <div>
-                        <img src="/logo_bag.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_food.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_wifi.svg" />
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="font-bold">
-                        <span className="color-ticket">$214,00</span>/pax
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-3 mt-4">
-                  <div className="mt-5 flex flex-row items-center gap-x-3">
-                    <img src="/logo_garuda.png" alt="Airplane" />
-                    <p>Garuda Indonesia</p>
-                  </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                    <div className="col-span-1 flex flex-col">
-                      <div className="flex flex-row justify-between">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">IDN</div>
-                          <div>12:33</div>
-                        </div>
-                        <div>
-                          <img src="/small_plane_logo.svg" />
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">JPN</div>
-                          <div>15:21</div>
-                        </div>
-                      </div>
-                      <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                        <div className="font-extrabold">View Detail</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={15} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="text-center">3 hours 11 minutes</div>
-                      <div>(1 transit)</div>
-                    </div>
-                    <div className="col-span-1 flex flex-row justify-evenly items-center">
-                      <div>
-                        <img src="/logo_bag.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_food.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_wifi.svg" />
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="font-bold">
-                        <span className="color-ticket">$214,00</span>/pax
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-3 mt-4">
-                  <div className="mt-5 flex flex-row items-center gap-x-3">
-                    <img src="/logo_garuda.png" alt="Airplane" />
-                    <p>Garuda Indonesia</p>
-                  </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                    <div className="col-span-1 flex flex-col">
-                      <div className="flex flex-row justify-between">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">IDN</div>
-                          <div>12:33</div>
-                        </div>
-                        <div>
-                          <img src="/small_plane_logo.svg" />
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">JPN</div>
-                          <div>15:21</div>
-                        </div>
-                      </div>
-                      <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                        <div className="font-extrabold">View Detail</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={15} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="text-center">3 hours 11 minutes</div>
-                      <div>(1 transit)</div>
-                    </div>
-                    <div className="col-span-1 flex flex-row justify-evenly items-center">
-                      <div>
-                        <img src="/logo_bag.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_food.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_wifi.svg" />
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="font-bold">
-                        <span className="color-ticket">$214,00</span>/pax
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-3 mt-4">
-                  <div className="mt-5 flex flex-row items-center gap-x-3">
-                    <img src="/logo_garuda.png" alt="Airplane" />
-                    <p>Garuda Indonesia</p>
-                  </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                    <div className="col-span-1 flex flex-col">
-                      <div className="flex flex-row justify-between">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">IDN</div>
-                          <div>12:33</div>
-                        </div>
-                        <div>
-                          <img src="/small_plane_logo.svg" />
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold">JPN</div>
-                          <div>15:21</div>
-                        </div>
-                      </div>
-                      <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                        <div className="font-extrabold">View Detail</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={15} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="text-center">3 hours 11 minutes</div>
-                      <div>(1 transit)</div>
-                    </div>
-                    <div className="col-span-1 flex flex-row justify-evenly items-center">
-                      <div>
-                        <img src="/logo_bag.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_food.svg" />
-                      </div>
-                      <div>
-                        <img src="/logo_wifi.svg" />
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <div className="font-bold">
-                        <span className="color-ticket">$214,00</span>/pax
-                      </div>
-                    </div>
-                    <div className="col-span-1 flex flex-col items-center justify-center">
-                      <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                    </>
+                  );
+                })}
               </section>
             </div>
           </div>
@@ -621,6 +405,7 @@ export default function Ticket() {
           <Footer />
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
