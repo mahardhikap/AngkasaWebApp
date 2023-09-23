@@ -34,7 +34,7 @@ export default function Ticket() {
   const getFlightMain = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight-all`,
         {
           headers: {
             'Content-Type': 'application/json', // Set the Content-Type header
@@ -316,7 +316,7 @@ export default function Ticket() {
                 <div>Sort by</div>
               </div>
               <section className="overflow-auto">
-                {data?.map((item) => {
+                {data?.tickets?.map((item) => {
                   return (
                     <>
                       <div className="bg-white rounded-xl p-3 mt-4">
