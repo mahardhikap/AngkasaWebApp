@@ -10,6 +10,7 @@ import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const [errMessage, setErrMessage] = useState('');
   const router = useRouter();
   const [inputData, setInputData] = useState({
     email: '',
@@ -30,12 +31,14 @@ export default function Login() {
         }
       );
       console.log('Data:', response.data);
+      setErrMessage('')
       localStorage.setItem("access_token", response.data.data.access_token)
       toast.success('Login success');
       setTimeout(()=>{
         router.push('/');
       },2000)
     } catch (error) {
+      setErrMessage(error)
       console.error('Error:', error);
       toast.error('Login failed');
     }
@@ -116,6 +119,9 @@ export default function Login() {
                 Sign in
               </button>
             </form>
+            <div className="my-5 text-red-500">
+                <p>{errMessage ? errMessage?.response?.data?.message : ''}</p>
+              </div>
             <div className="my-5">
               <p className="text-center my-3">Did you forgot your password?</p>
             </div>
