@@ -81,6 +81,7 @@ export default function Ticket() {
 
   useEffect(() => {
     getFilteredFlight();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reqFacility, reqAirline, reqMinPrice]);
 
   const resetButton = () => {

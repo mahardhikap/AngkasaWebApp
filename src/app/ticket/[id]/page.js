@@ -116,7 +116,8 @@ export default function FlightDetail() {
       getContactDetail()
       getFlightDetail();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const NavbarHandle = () => {
     if (!token) {

@@ -57,7 +57,8 @@ export default function Booking() {
     if (token) {
       getProfile();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const NavbarHandle = () => {
     if (!token) {
