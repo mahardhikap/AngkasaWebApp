@@ -16,9 +16,36 @@ import Footer from '@/app/footer/page';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { MyProvider } from '../context/page';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Booking() {
   const [token, setToken] = useState(null);
+  const router = useRouter()
+  const [data, setData] = useState(null)
+
+
+  const getProfile = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/users/detail`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setData(response.data.data);
+      console.log('Data profile:', response.data.data);
+      toast.success('Get detail profile success!');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Get detail profile failed');
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -26,11 +53,26 @@ export default function Booking() {
     }
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      getProfile()
+    }
+  }, [token]);
+
   const NavbarHandle = () => {
     if (!token) {
       return <Navbar />;
     } else {
       return <LoginNavbar />;
+    }
+  };
+
+  const LogoutHandle = () => {
+    if (token) {
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+      return localStorage.clear();
     }
   };
 
@@ -54,13 +96,13 @@ export default function Booking() {
                       Select Photo
                     </div>
                     <div className="font-bold text-xl text-center mb-2">
-                      Mike Kowalski
+                      {data ? data?.name : 'Loading...'}
                     </div>
                     <div className="flex items-center flex-row gap-2 mb-4">
                       <div>
                         <FontAwesomeIcon icon={faLocationDot} width={18} />
                       </div>
-                      <div className="text-sm">Medan, Indonesia</div>
+                      <div className="text-sm">Yogyakarta, Indonesia</div>
                     </div>
                   </div>
                   <div className="flex flex-row justify-between mb-2">
@@ -111,7 +153,10 @@ export default function Booking() {
                       <FontAwesomeIcon icon={faChevronRight} width={10} />
                     </div>
                   </div>
-                  <div className="flex flex-row items-center justify-between mb-4">
+                  <div
+                    className="flex flex-row items-center justify-between mb-4 hover:text-blue-900 cursor-pointer"
+                    onClick={() => LogoutHandle()}
+                  >
                     <div className="flex flex-row gap-3 items-center">
                       <div>
                         <FontAwesomeIcon icon={faRightFromBracket} width={20} />
@@ -209,6 +254,7 @@ export default function Booking() {
           </div>
         </div>
         <Footer />
+        <ToastContainer/>
       </MyProvider>
     </>
   );

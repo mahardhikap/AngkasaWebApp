@@ -8,25 +8,53 @@ import {
   faGear,
   faRightFromBracket,
   faChevronRight,
-  faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/app/navbar/page';
 import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MyProvider } from '../context/page';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Profile() {
   const router = useRouter();
   const [token, setToken] = useState(null);
+  const [data, setData] = useState(null)
+
+  const getProfile = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/users/detail`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setData(response.data.data);
+      console.log('Data profile:', response.data.data);
+      toast.success('Get detail profile success!');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Get detail profile failed');
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setToken(localStorage.getItem('access_token'));
     }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      getProfile()
+    }
+  }, [token]);
 
   const NavbarHandle = () => {
     if (!token) {
@@ -65,13 +93,13 @@ export default function Profile() {
                       Select Photo
                     </div>
                     <div className="font-bold text-xl text-center mb-2">
-                      Mike Kowalski
+                      {data ? data?.name : 'Loading...'}
                     </div>
                     <div className="flex items-center flex-row gap-2 mb-4">
                       <div>
                         <FontAwesomeIcon icon={faLocationDot} width={18} />
                       </div>
-                      <div className="text-sm">Medan, Indonesia</div>
+                      <div className="text-sm">Yogyakarta, Indonesia</div>
                     </div>
                   </div>
                   <div className="flex flex-row justify-between mb-2">
@@ -147,7 +175,7 @@ export default function Profile() {
                         <div className="border-b-2 mb-5">
                           <label className="p-3 text-sm">Email</label>
                           <input
-                            defaultValue="putrad578@gmail.com"
+                            defaultValue={data ? data?.email : 'Loading...'}
                             type="email"
                             className="w-full p-3 outline-none"
                           />
@@ -168,7 +196,7 @@ export default function Profile() {
                         <div className="border-b-2 mb-5">
                           <label className="p-3 text-sm">Fullname</label>
                           <input
-                            defaultValue="Mahardhika Pratama"
+                            defaultValue={data ? data?.name : 'Loading...'}
                             type="text"
                             className="w-full p-3 outline-none"
                           />
@@ -209,6 +237,7 @@ export default function Profile() {
           </div>
         </div>
         <Footer />
+        <ToastContainer/>
       </MyProvider>
     </>
   );

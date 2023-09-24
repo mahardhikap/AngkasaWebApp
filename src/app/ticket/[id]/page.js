@@ -34,7 +34,7 @@ export default function FlightDetail() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/booking/tickets/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -56,7 +56,7 @@ export default function FlightDetail() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -84,7 +84,7 @@ export default function FlightDetail() {
         bodyFormData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
