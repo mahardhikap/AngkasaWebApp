@@ -16,7 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Ticket() {
-  const [rangeValue, setRangeValue] = useState([2, 20]);
+  const [rangeValue, setRangeValue] = useState([0, 1000]);
   const [transitOpen, setTransitOpen] = useState(false);
   const [facilitiesOpen, setFacilitiesOpen] = useState(false);
   const [departureOpen, setDepartureOpen] = useState(false);
@@ -25,6 +25,10 @@ export default function Ticket() {
   const [ticketOpen, setTicketOpen] = useState(false);
   const [token, setToken] = useState(null);
   const [data, setData] = useState(null);
+  const [filter, setFilter] = useState(null);
+  const [reqFacility, setReqFacility] = useState('');
+  const [reqAirline, setReqAirline] = useState('');
+  const [reqMinPrice, setReqMinPrice] = useState(0)
   const facilitiesData = [
     { name: 'baggage', image: '/logo_bag.svg' },
     { name: 'meal', image: '/logo_food.svg' },
@@ -50,6 +54,20 @@ export default function Ticket() {
     }
   };
 
+  const getFilteredFlight = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight?facilities=${reqFacility}&airlineId=${reqAirline}&minPrice=${reqMinPrice}&maxPrice=1000`
+      );
+      setFilter(response.data.data);
+      console.log('Data filter:', response.data);
+      toast.success('Get filter flight success');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Get filter flight failed');
+    }
+  };
+
   const NavbarHandle = () => {
     if (!token) {
       return <Navbar />;
@@ -64,6 +82,16 @@ export default function Ticket() {
     }
     getFlightMain();
   }, []);
+
+  useEffect(() => {
+    getFilteredFlight();
+  }, [reqFacility, reqAirline, reqMinPrice]);
+
+  const resetButton = () => {
+    setReqAirline('')
+    setReqFacility('')
+    setReqMinPrice(0)
+  }
 
   const transitToggle = () => {
     setTransitOpen(!transitOpen);
@@ -86,7 +114,7 @@ export default function Ticket() {
 
   const handleSliderChange = (e) => {
     const newValue = parseFloat(e.target.value);
-    setRangeValue([newValue, rangeValue[1]]);
+    setReqMinPrice(newValue);
   };
 
   return (
@@ -127,9 +155,9 @@ export default function Ticket() {
         <div className="container w-11/12 mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-4">
             <div className="col-span-1 mt-10 px-2">
-              <div className="font-bold flex justify-between">
+              <div className="font-bold flex justify-between cursor-pointer">
                 <div>Filter</div>
-                <div>Reset</div>
+                <div onClick={() => resetButton()} className='color-ticket hover:text-blue-900'>Reset</div>
               </div>
               <div className="grid grid-cols-3 gap-2 mt-4 rounded-lg bg-white p-3">
                 <div className="col-span-3 cursor-pointer">
@@ -175,14 +203,28 @@ export default function Ticket() {
                       </span>
                     </summary>
                     <div>
-                      <input type="checkbox" className="ring-2" /> Luggage
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqFacility(1)}
+                      />{' '}
+                      Luggage
                     </div>
                     <div>
-                      <input type="checkbox" className="ring-2" /> In-Flight
-                      Meal
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqFacility(2)}
+                      />{' '}
+                      In-Flight Meal
                     </div>
                     <div>
-                      <input type="checkbox" className="ring-2" /> Wi-fi
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqFacility(3)}
+                      />{' '}
+                      Wi-fi
                     </div>
                   </details>
 
@@ -263,14 +305,28 @@ export default function Ticket() {
                       </span>
                     </summary>
                     <div>
-                      <input type="checkbox" className="ring-2" /> Garuda
-                      Indonesia
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqAirline(2)}
+                      />{' '}
+                      Garuda Indonesia
                     </div>
                     <div>
-                      <input type="checkbox" className="ring-2" /> Air Asia
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqAirline(4)}
+                      />{' '}
+                      Air Asia
                     </div>
                     <div>
-                      <input type="checkbox" className="ring-2" /> Lion Air
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqAirline(3)}
+                      />{' '}
+                      Lion Air
                     </div>
                   </details>
 
@@ -293,16 +349,15 @@ export default function Ticket() {
                     <div className="range-slider">
                       <input
                         type="range"
-                        min={2}
-                        max={20}
+                        min={0}
+                        max={1000}
                         step={0.01}
-                        value={rangeValue[0]}
+                        value={reqMinPrice}
                         onChange={handleSliderChange}
                       />
                     </div>
                     <div>
-                      Min Price: ${rangeValue[0].toFixed(2)} - Max Price: $
-                      {rangeValue[1].toFixed(2)}
+                      Min Price: ${reqMinPrice.toFixed(2)} - Max Price: $1000
                     </div>
                   </details>
                 </div>
@@ -316,87 +371,213 @@ export default function Ticket() {
                 <div>Sort by</div>
               </div>
               <section className="overflow-auto">
-                {data?.tickets?.map((item) => {
-                  return (
-                    <>
-                      <div className="bg-white rounded-xl p-3 mt-4">
-                        <div className="mt-5 flex flex-row items-center gap-x-3">
-                          <img
-                            src={item.photo}
-                            alt="Airplane"
-                            className="w-6/12 md:w-3/12"
-                          />
-                          <p>{item.name}</p>
-                        </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
-                          <div className="col-span-1 flex flex-col">
-                            <div className="flex flex-row justify-between">
-                              <div className="flex flex-col items-center">
-                                <div className="font-bold">
-                                  {item.from.code}
+                {filter
+                  ? filter?.map((item) => {
+                      return (
+                        <>
+                          <div className="bg-white rounded-xl p-3 mt-4">
+                            <div className="mt-5 flex flex-row items-center gap-x-3">
+                              <img
+                                src={item.photo}
+                                alt="Airplane"
+                                className="w-6/12 md:w-3/12"
+                              />
+                              <p>{item.name}</p>
+                            </div>
+                            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
+                              <div className="col-span-1 flex flex-col">
+                                <div className="flex flex-row justify-between">
+                                  <div className="flex flex-col items-center">
+                                    <div className="font-bold">
+                                      {item.from.code}
+                                    </div>
+                                    <div>
+                                      {new Date(
+                                        `${item.takeoff}`
+                                      ).toLocaleString('en-US', {
+                                        timeZone: 'Asia/Jakarta',
+                                        hour12: false,
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                      })}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <img src="/small_plane_logo.svg" />
+                                  </div>
+                                  <div className="flex flex-col items-center">
+                                    <div className="font-bold">
+                                      {item.to.code}
+                                    </div>
+                                    <div>
+                                      {new Date(
+                                        `${item.landing}`
+                                      ).toLocaleString('en-US', {
+                                        timeZone: 'Asia/Jakarta',
+                                        hour12: false,
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                      })}
+                                    </div>
+                                  </div>
                                 </div>
-                                <div>{new Date(`${item.takeoff}`).toLocaleString('en-US', { timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit'})}</div>
-                              </div>
-                              <div>
-                                <img src="/small_plane_logo.svg" />
-                              </div>
-                              <div className="flex flex-col items-center">
-                                <div className="font-bold">{item.to.code}</div>
-                                <div>{new Date(`${item.landing}`).toLocaleString('en-US', { timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit'})}</div>
-                              </div>
-                            </div>
-                            <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
-                              <div className="font-extrabold">View Detail</div>
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={faChevronDown}
-                                  width={15}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-span-1 flex flex-col items-center justify-center">
-                            <div className="text-center">
-                              {item.interval_time}
-                            </div>
-                            <div>(1 transit)</div>
-                          </div>
-                          <div className="col-span-1 flex flex-row justify-evenly items-center">
-                            {item.facilities.map((facility) => {
-                              const matchingFacility = facilitiesData.find(
-                                (data) => data.name === facility
-                              );
-
-                              return (
-                                <div key={facility}>
-                                  {matchingFacility && (
-                                    <img
-                                      src={matchingFacility.image}
-                                      alt={facility}
+                                <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
+                                  <div className="font-extrabold">
+                                    View Detail
+                                  </div>
+                                  <div>
+                                    <FontAwesomeIcon
+                                      icon={faChevronDown}
+                                      width={15}
                                     />
-                                  )}
+                                  </div>
                                 </div>
-                              );
-                            })}
-                          </div>
-                          <div className="col-span-1 flex flex-col items-center justify-center">
-                            <div className="font-bold">
-                              <span className="color-ticket">
-                                ${item.price}
-                              </span>
-                              /pax
+                              </div>
+                              <div className="col-span-1 flex flex-col items-center justify-center">
+                                <div className="text-center">
+                                  {item.interval_time}
+                                </div>
+                                <div>(1 transit)</div>
+                              </div>
+                              <div className="col-span-1 flex flex-row justify-evenly items-center">
+                                {item?.facilities?.map((facility) => {
+                                  const matchingFacility = facilitiesData.find(
+                                    (data) => data.name === facility
+                                  );
+
+                                  return (
+                                    <div key={facility}>
+                                      {matchingFacility && (
+                                        <img
+                                          src={matchingFacility.image}
+                                          alt={facility}
+                                        />
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                              <div className="col-span-1 flex flex-col items-center justify-center">
+                                <div className="font-bold">
+                                  <span className="color-ticket">
+                                    ${item.price}
+                                  </span>
+                                  /pax
+                                </div>
+                              </div>
+                              <div className="col-span-1 flex flex-col items-center justify-center">
+                                <button className="px-10 py-3 text-white button-ticket rounded-xl">
+                                  Select
+                                </button>
+                              </div>
                             </div>
                           </div>
-                          <div className="col-span-1 flex flex-col items-center justify-center">
-                            <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                              Select
-                            </button>
+                        </>
+                      );
+                    })
+                  : data?.tickets?.map((item) => {
+                      return (
+                        <>
+                          <div className="bg-white rounded-xl p-3 mt-4">
+                            <div className="mt-5 flex flex-row items-center gap-x-3">
+                              <img
+                                src={item.photo}
+                                alt="Airplane"
+                                className="w-6/12 md:w-3/12"
+                              />
+                              <p>{item.name}</p>
+                            </div>
+                            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mt-4">
+                              <div className="col-span-1 flex flex-col">
+                                <div className="flex flex-row justify-between">
+                                  <div className="flex flex-col items-center">
+                                    <div className="font-bold">
+                                      {item.from.code}
+                                    </div>
+                                    <div>
+                                      {new Date(
+                                        `${item.takeoff}`
+                                      ).toLocaleString('en-US', {
+                                        timeZone: 'Asia/Jakarta',
+                                        hour12: false,
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                      })}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <img src="/small_plane_logo.svg" />
+                                  </div>
+                                  <div className="flex flex-col items-center">
+                                    <div className="font-bold">
+                                      {item.to.code}
+                                    </div>
+                                    <div>
+                                      {new Date(
+                                        `${item.landing}`
+                                      ).toLocaleString('en-US', {
+                                        timeZone: 'Asia/Jakarta',
+                                        hour12: false,
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="color-ticket flex flex-row justify-center items-center gap-x-3">
+                                  <div className="font-extrabold">
+                                    View Detail
+                                  </div>
+                                  <div>
+                                    <FontAwesomeIcon
+                                      icon={faChevronDown}
+                                      width={15}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-span-1 flex flex-col items-center justify-center">
+                                <div className="text-center">
+                                  {item.interval_time}
+                                </div>
+                                <div>(1 transit)</div>
+                              </div>
+                              <div className="col-span-1 flex flex-row justify-evenly items-center">
+                                {item.facilities.map((facility) => {
+                                  const matchingFacility = facilitiesData.find(
+                                    (data) => data.name === facility
+                                  );
+
+                                  return (
+                                    <div key={facility}>
+                                      {matchingFacility && (
+                                        <img
+                                          src={matchingFacility.image}
+                                          alt={facility}
+                                        />
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                              <div className="col-span-1 flex flex-col items-center justify-center">
+                                <div className="font-bold">
+                                  <span className="color-ticket">
+                                    ${item.price}
+                                  </span>
+                                  /pax
+                                </div>
+                              </div>
+                              <div className="col-span-1 flex flex-col items-center justify-center">
+                                <button className="px-10 py-3 text-white button-ticket rounded-xl">
+                                  Select
+                                </button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </>
-                  );
-                })}
+                        </>
+                      );
+                    })}
               </section>
             </div>
           </div>
