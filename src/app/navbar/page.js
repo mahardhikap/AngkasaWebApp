@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './navbar.css';
 import Link from 'next/link';
 import Modal from '../modal/page';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -16,7 +17,13 @@ export default function Navbar() {
       <nav className="bg-white border-gray-200 dark:bg-gray-900 mx-auto">
         <div className="w-full container flex flex-wrap items-center justify-between gap-5 xl:gap-0 mx-auto py-4">
           <Link href="/" className="flex items-center">
-            <img src="/Group_28.svg" className="h-8 mr-3" alt="Flowbite Logo" />
+            <Image
+              src="/Group_28.svg"
+              className="h-8 mr-3"
+              alt="Logo-Navbar"
+              width={150}
+              height={150}
+            />
           </Link>
           <button
             data-collapse-toggle="navbar-default"
@@ -51,16 +58,20 @@ export default function Navbar() {
             <div className="flex flex-col lg:flex-row items-center gap-10 mt-5 md:mt-0">
               {/* Use responsive classes to control width */}
               <div className="p-3 color-search-navbar rounded-lg relative w-full sm:w-96 sm:w-auto">
-                <img src="/search.svg" className="absolute left-0 ps-3" />
+                <Image
+                  src="/search.svg"
+                  className="absolute left-0 ps-3"
+                  width={35}
+                  height={35}
+                  alt="logo-search"
+                />
                 <input
                   placeholder="Where you want to go?"
                   className="ps-10 bg-transparent outline-none w-full"
                 />
               </div>
               <div>
-                <Modal
-                buttonLabel={'Find Ticket'}
-                />
+                <Modal buttonLabel={'Find Ticket'} />
                 {/* <Link href="/ticket">
                   <div className="font-bold hover:text-blue-900 cursor-pointer">
                     Find Ticket
@@ -75,7 +86,7 @@ export default function Navbar() {
                 </Link>
               </div>
               <div>
-                <Link href='/register'>
+                <Link href="/register">
                   <button className="py-3 px-5 rounded-lg text-white font-bold color-button-navbar sm:px-10 hover:bg-blue-900">
                     Sign In
                   </button>

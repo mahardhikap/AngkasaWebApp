@@ -10,6 +10,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 
 export default function Ticket() {
   const [loading, setLoading] = useState(true);
@@ -117,7 +118,13 @@ export default function Ticket() {
       <div className="w-11/12 container mx-auto">{NavbarHandle()}</div>
       <div className="bg-slate-100 container mx-auto">
         <div className="background-ticket-header container w-full mx-auto rounded-b-3xl relative">
-          <img src="/logo_plane_blue.png" className="absolute z-0" />
+          <Image
+            src="/logo_plane_blue.png"
+            className="absolute z-0"
+            width={220}
+            height={220}
+            alt="plane-blue"
+          />
           <div className="grid grid-cols-1 sm:grid-cols-2 py-10 z-10 w-full lg:w-10/12 container mx-auto text-white">
             <div className="z-10 p-3 grid grid-cols-3">
               <div className="col-span-3">
@@ -132,7 +139,12 @@ export default function Ticket() {
               </div>
               <div className="flex flex-col justify-center items-center">
                 <div>
-                  <img src="/arrowdestination.svg" />
+                  <Image
+                    src="/arrowdestination.svg"
+                    width={20}
+                    height={20}
+                    alt="arrow-destination"
+                  />
                 </div>
                 <div>6 Passenger</div>
               </div>
@@ -384,10 +396,12 @@ export default function Ticket() {
                       <>
                         <div className="bg-white rounded-xl p-3 mt-4">
                           <div className="mt-5 flex flex-row items-center gap-x-3">
-                            <img
+                            <Image
                               src={item.photo}
                               alt="Airplane"
                               className="w-6/12 md:w-3/12"
+                              width={100}
+                              height={100}
                             />
                             <p>{item.name}</p>
                           </div>
@@ -411,7 +425,12 @@ export default function Ticket() {
                                   </div>
                                 </div>
                                 <div>
-                                  <img src="/small_plane_logo.svg" />
+                                  <Image
+                                    src="/small_plane_logo.svg"
+                                    width={20}
+                                    height={20}
+                                    alt="small-plane-logo"
+                                  />
                                 </div>
                                 <div className="flex flex-col items-center">
                                   <div className="font-bold">
@@ -457,9 +476,11 @@ export default function Ticket() {
                                 return (
                                   <div key={facility}>
                                     {matchingFacility && (
-                                      <img
+                                      <Image
                                         src={matchingFacility.image}
                                         alt={facility}
+                                        width={17}
+                                        height={17}
                                       />
                                     )}
                                   </div>
@@ -492,10 +513,12 @@ export default function Ticket() {
                       <>
                         <div className="bg-white rounded-xl p-3 mt-4">
                           <div className="mt-5 flex flex-row items-center gap-x-3">
-                            <img
+                            <Image
                               src={item.photo}
                               alt="Airplane"
                               className="w-6/12 md:w-3/12"
+                              width={100}
+                              height={100}
                             />
                             <p>{item.name}</p>
                           </div>
@@ -519,7 +542,12 @@ export default function Ticket() {
                                   </div>
                                 </div>
                                 <div>
-                                  <img src="/small_plane_logo.svg" />
+                                  <Image
+                                    src="/small_plane_logo.svg"
+                                    width={20}
+                                    height={20}
+                                    alt="small-plane-logo"
+                                  />
                                 </div>
                                 <div className="flex flex-col items-center">
                                   <div className="font-bold">
@@ -565,9 +593,11 @@ export default function Ticket() {
                                 return (
                                   <div key={facility}>
                                     {matchingFacility && (
-                                      <img
+                                      <Image
                                         src={matchingFacility.image}
                                         alt={facility}
+                                        width={17}
+                                        height={17}
                                       />
                                     )}
                                   </div>

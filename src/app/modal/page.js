@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './mymodal.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Modal = ({ buttonLabel }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +30,7 @@ const Modal = ({ buttonLabel }) => {
               </span>
             </div>
             <div>Hey, Where you want to go?</div>
-            <div className="flex flex-row items-center justify-between">
+            <div className="flex flex-row items-center justify-between text-custom font-bold">
               <div>Recently Searched</div>
               <div>
                 <FontAwesomeIcon icon={faChevronRight} width={20} />
@@ -38,42 +39,42 @@ const Modal = ({ buttonLabel }) => {
             <div className="flex flex-row items-center justify-between">
               <div>
                 <div>From</div>
-                <div>Medan</div>
+                <div className='font-bold'>Medan</div>
                 <div>Indonesia</div>
               </div>
               <div>
-                <img src="/arrowblue.svg" />
+                <Image src="/arrowblue.svg" width={20} height={20} alt='logo-arrow-blue'/>
               </div>
               <div>
                 <div>To</div>
-                <div>Tokyo</div>
+                <div className='font-bold'>Tokyo</div>
                 <div>Japan</div>
               </div>
             </div>
             <div className="flex items-center flex-row justify-between">
               <div className="background-custom rounded-lg flex items-center p-3 justify-center gap-3">
-                <div>Logo</div>
-                <div>One Way</div>
+                <div><Image src={'/small_white_plane.svg'} width={20} height={20} alt='small-white-plane'/></div>
+                <div className='text-white font-medium'>One Way</div>
               </div>
               <div className="bg-slate-100 rounded-lg flex items-center p-3 justify-center gap-3">
-                <div>Logo</div>
-                <div>Round Trip</div>
+                <div><Image src={'/small_reverse_logo.svg'} width={20} height={20} alt='small-reverse-logo'/></div>
+                <div className='font-medium'>Round Trip</div>
               </div>
             </div>
             <div>Departure</div>
             <div className="flex flex-row items-center justify-between border-2 p-3 rounded-lg">
-              <div>Monday, 20 July 2020</div>
-              <div>Logo</div>
+              <div className='font-semibold'>Monday, 20 July 2020</div>
+              <div><FontAwesomeIcon icon={faChevronRight} width={20} color='#2395FF'/></div>
             </div>
             <div>How many person?</div>
             <div className="flex items-center justify-between">
               <div className="flex items-center p-3 rounded-lg border-2 gap-6">
-                <div>2 Child</div>
-                <div>Logo</div>
+                <div className='font-semibold'>2 Child</div>
+                <div><FontAwesomeIcon icon={faChevronRight} width={20} color='#2395FF'/></div>
               </div>
               <div className="flex items-center p-3 rounded-lg border-2 gap-6">
-                <div>4 Adult</div>
-                <div>Logo</div>
+                <div className='font-semibold'>4 Adult</div>
+                <div><FontAwesomeIcon icon={faChevronRight} width={20} color='#2395FF'/></div>
               </div>
             </div>
             <div>Which class do you want?</div>

@@ -12,6 +12,7 @@ import Footer from '@/app/footer/page';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { MyProvider } from '../context/page';
+import Image from 'next/image';
 
 export default function FlightDetail() {
   const [token, setToken] = useState(null);
@@ -36,7 +37,7 @@ export default function FlightDetail() {
         <div className="container w-11/12 mx-auto">{NavbarHandle()}</div>
         <div className="bg-slate-100">
           <div className="custom-background container w-full mx-auto rounded-b-3xl h-auto">
-            <img src="/logo_plane_blue.png" />
+            <Image src="/logo_plane_blue.png" width={250} height={250} alt='blue-plane'/>
           </div>
           <div className="mx-auto container w-11/12">
             <div className="grid grid-cols-1 lg:grid-cols-3 relative">
@@ -173,14 +174,14 @@ export default function FlightDetail() {
                 <div className="bg-white rounded-2xl p-3">
                   <div className="p-3 flex items-center gap-3">
                     <div>
-                      <img src="/logo_garuda.png" />
+                      <Image src="/logo_garuda.png" width={100} height={100} alt='logo-airlines'/>
                     </div>
                     <div>Garuda Indonesia</div>
                   </div>
                   <div className="p-3 flex flex-row items-center justify-between">
                     <div className="font-bold">Medan (IDN)</div>
                     <div>
-                      <img src="/small_plane_logo.svg" />
+                      <Image src="/small_plane_logo.svg" width={20} height={20} alt='small-logo-grey-plane'/>
                     </div>
                     <div className="font-bold">Tokyo (JPN)</div>
                   </div>

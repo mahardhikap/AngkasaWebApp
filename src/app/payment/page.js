@@ -8,6 +8,7 @@ import Footer from '@/app/footer/page';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { MyProvider } from '../context/page';
+import Image from 'next/image';
 
 export default function Payment() {
   const [token, setToken] = useState(null);
@@ -38,14 +39,14 @@ export default function Payment() {
                 <div className="flex flex-row items-center justify-between p-3">
                   <div>Paypal</div>
                   <div>
-                    <img src="/paypal.webp" width={40} />
+                    <Image src="/paypal.webp" width={40} height={40} alt='paypal-logo'/>
                   </div>
                 </div>
                 <div className="flex flex-row justify-between p-3">
                   <div>Credit Card</div>
                   <div className="flex flex-row items-center">
                     <div>
-                      <img src="/paymentgate.png" width={150} />
+                      <Image src="/paymentgate.png" width={150} height={40} alt='payment-gate-logo'/>
                     </div>
                   </div>
                 </div>

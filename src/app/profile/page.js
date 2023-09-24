@@ -18,11 +18,12 @@ import { MyProvider } from '../context/page';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 
 export default function Profile() {
   const router = useRouter();
   const [token, setToken] = useState(null);
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
   const getProfile = async () => {
     try {
@@ -30,7 +31,7 @@ export default function Profile() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/users/detail`,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -52,7 +53,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (token) {
-      getProfile()
+      getProfile();
     }
   }, [token]);
 
@@ -84,9 +85,12 @@ export default function Profile() {
                 <div className="p-3 bg-white rounded-xl">
                   <div className="flex flex-col justify-center items-center">
                     <div>
-                      <img
+                      <Image
                         src="/photo_profile.png"
                         className="p-2 rounded-full border-2 border-blue-500 mb-4"
+                        width={100}
+                        height={100}
+                        alt="photo-profile"
                       />
                     </div>
                     <div className="p-3 border-2 custom-color rounded-xl font-bold border-blue-500 hover:bg-blue-500 hover:text-white mb-4 cursor-pointer">
@@ -237,7 +241,7 @@ export default function Profile() {
           </div>
         </div>
         <Footer />
-        <ToastContainer/>
+        <ToastContainer />
       </MyProvider>
     </>
   );

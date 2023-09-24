@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './navbar.css';
 import Link from 'next/link';
 import Modal from '../modal/page';
+import Image from 'next/image';
 
 export default function LoginNavbar() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -16,7 +17,7 @@ export default function LoginNavbar() {
       <nav className="bg-white border-gray-200 dark:bg-gray-900 mx-auto">
         <div className="w-full container flex flex-wrap items-center justify-between gap-5 xl:gap-0 mx-auto py-4">
           <Link href="/" className="flex items-center">
-            <img src="/Group_28.svg" className="h-8 mr-3" alt="Flowbite Logo" />
+            <Image src="/Group_28.svg" className="h-8 mr-3" alt="Logo-Navbar" width={150} height={150}/>
           </Link>
           <button
             data-collapse-toggle="navbar-default"
@@ -51,7 +52,7 @@ export default function LoginNavbar() {
             <div className="flex flex-col lg:flex-row items-center gap-10 mt-5 md:mt-0">
               {/* Use responsive classes to control width */}
               <div className="p-3 color-search-navbar rounded-lg relative w-full sm:w-96 sm:w-auto">
-                <img src="/search.svg" className="absolute left-0 ps-3" />
+                <Image src="/search.svg" className="absolute left-0 ps-3" width={35} height={35} alt='logo-search'/>
                 <input
                   placeholder="Where you want to go?"
                   className="ps-10 bg-transparent outline-none w-full"
@@ -74,18 +75,18 @@ export default function LoginNavbar() {
               </div>
               <div>
                 <div className="cursor-pointer">
-                  <img src="/message_icon.svg" />
+                  <Image src="/message_icon.svg" width={23} height={23} alt='logo-message'/>
                 </div>
               </div>
               <div>
                 <div className="cursor-pointer">
-                  <img src="/notif_icon.svg" />
+                  <Image src="/notif_icon.svg" width={23} height={23} alt='logo-notif'/>
                 </div>
               </div>
               <div>
                 <Link href='/profile'>
                   <div className="border-2 border-custom rounded-full">
-                    <img src="/photo_profile.png" className="p-2 max-h-14" />
+                    <Image src="/photo_profile.png" width={55} height={55} alt='profile-pic' className="p-2 max-h-14" />
                   </div>
                 </Link>
               </div>

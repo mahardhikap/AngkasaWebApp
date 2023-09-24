@@ -16,6 +16,7 @@ import { useParams } from 'next/navigation';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 
 export default function FlightDetail() {
   const [token, setToken] = useState(null);
@@ -131,7 +132,7 @@ export default function FlightDetail() {
         <div className="container w-11/12 mx-auto">{NavbarHandle()}</div>
           <div className="bg-slate-100">
             <div className="custom-background container w-full mx-auto rounded-b-3xl h-auto">
-              <img src="/logo_plane_blue.png" />
+              <Image src="/logo_plane_blue.png" width={200} height={200} alt='plane-blue'/>
             </div>
             <div className="mx-auto container w-11/12">
               <div className="grid grid-cols-1 lg:grid-cols-3 relative">
@@ -285,14 +286,14 @@ export default function FlightDetail() {
                   <div className="bg-white rounded-2xl p-3">
                     <div className="p-3 flex items-center gap-3">
                       <div>
-                        <img src={flight?.photo} />
+                        <Image src={flight?.photo} width={140} height={140} alt='airplane-logo'/>
                       </div>
                       <div>{flight?.name}</div>
                     </div>
                     <div className="p-3 flex flex-row items-center justify-between">
                       <div className="font-bold">{flight?.from?.location?.split(',')[0]} ({flight?.from?.code})</div>
                       <div>
-                        <img src="/small_plane_logo.svg" />
+                        <Image src="/small_plane_logo.svg" width={20} height={20} alt='small-plane-logo' />
                       </div>
                       <div className="font-bold">{flight?.to?.location?.split(',')[0]} ({flight?.to?.code})</div>
                     </div>

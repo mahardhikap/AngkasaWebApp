@@ -20,12 +20,12 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 
 export default function Booking() {
   const [token, setToken] = useState(null);
-  const router = useRouter()
-  const [data, setData] = useState(null)
-
+  const router = useRouter();
+  const [data, setData] = useState(null);
 
   const getProfile = async () => {
     try {
@@ -33,7 +33,7 @@ export default function Booking() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/users/detail`,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -55,7 +55,7 @@ export default function Booking() {
 
   useEffect(() => {
     if (token) {
-      getProfile()
+      getProfile();
     }
   }, [token]);
 
@@ -87,9 +87,12 @@ export default function Booking() {
                 <div className="p-3 bg-white rounded-xl">
                   <div className="flex flex-col justify-center items-center">
                     <div>
-                      <img
+                      <Image
                         src="/photo_profile.png"
                         className="p-2 rounded-full border-2 border-blue-500 mb-4"
+                        width={100}
+                        height={100}
+                        alt="photo-profile"
                       />
                     </div>
                     <div className="p-3 border-2 custom-color rounded-xl font-bold border-blue-500 hover:bg-blue-500 hover:text-white mb-4 cursor-pointer">
@@ -192,7 +195,12 @@ export default function Booking() {
                   <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
                     <div className="font-extrabold">IDN</div>
                     <div>
-                      <img src="/small_plane_logo.svg" />
+                      <Image
+                        src="/small_plane_logo.svg"
+                        width={20}
+                        height={20}
+                        alt="small-plane-logo"
+                      />
                     </div>
                     <div className="font-extrabold">JPN</div>
                   </div>
@@ -223,7 +231,12 @@ export default function Booking() {
                   <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
                     <div className="font-extrabold">IDN</div>
                     <div>
-                      <img src="/small_plane_logo.svg" />
+                      <Image
+                        src="/small_plane_logo.svg"
+                        width={20}
+                        height={20}
+                        alt="small-plane-logo"
+                      />
                     </div>
                     <div className="font-extrabold">JPN</div>
                   </div>
@@ -254,7 +267,7 @@ export default function Booking() {
           </div>
         </div>
         <Footer />
-        <ToastContainer/>
+        <ToastContainer />
       </MyProvider>
     </>
   );

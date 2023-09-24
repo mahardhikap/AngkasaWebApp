@@ -11,7 +11,7 @@ import './index.css';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-export default function MainYuk() {
+export default function MyHomepage() {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -51,15 +51,15 @@ export default function MainYuk() {
             src="/Group_55.png"
             width={500}
             height={500}
-            className="w-1/4 absolute right-[-120px] hidden sm:block top-[130px] sm:top-[150px] md:top-[150px] z-0"
-            alt="blue"
+            className="w-1/4 absolute right-[-120px] hidden sm:block top-[130px] sm:top-[150px] md:top-0 z-0"
+            alt="right"
           />
           <Image
             src="/vector_6.png"
             width={500}
             height={500}
             className="w-1/4 absolute right-0 md:bottom-[-300px] lg:bottom-[-400px] xl:bottom-[-550px] 2xl:w-1/6 z-[-10]"
-            alt="right"
+            alt="blue"
           />
         </div>
       </div>
@@ -79,10 +79,12 @@ export default function MainYuk() {
                   </p>
                 </div>
               </div>
-              <img
+              <Image
                 className="w-full rounded-2xl"
                 src="/japan.png"
                 alt="Japan"
+                width={100}
+                height={100}
                 style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
               />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
@@ -107,10 +109,12 @@ export default function MainYuk() {
                   </p>
                 </div>
               </div>
-              <img
+              <Image
                 className="w-full rounded-2xl"
                 src="/spain.png"
                 alt="Japan"
+                width={100}
+                height={100}
                 style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
               />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
@@ -135,10 +139,12 @@ export default function MainYuk() {
                   </p>
                 </div>
               </div>
-              <img
+              <Image
                 className="w-full rounded-2xl"
                 src="/japan.png"
                 alt="Japan"
+                width={100}
+                height={100}
                 style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
               />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
@@ -163,10 +169,12 @@ export default function MainYuk() {
                   </p>
                 </div>
               </div>
-              <img
+              <Image
                 className="w-full rounded-2xl"
                 src="/spain.png"
                 alt="Japan"
+                width={100}
+                height={100}
                 style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
               />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
@@ -192,10 +200,12 @@ export default function MainYuk() {
                   </p>
                 </div>
               </div>
-              <img
+              <Image
                 className="w-full rounded-2xl"
                 src="/japan.png"
                 alt="Japan"
+                width={100}
+                height={100}
                 style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}
               />
               <div className="absolute inset-0 bg-black opacity-50 rounded-2xl z-0"></div>
@@ -222,19 +232,19 @@ export default function MainYuk() {
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-10 w-fit mx-auto">
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <img className="rounded-full" src="/paris.png" />
+                <Image className="rounded-full" src="/paris.png" width={200} height={200}/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Paris</p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <img className="rounded-full" src="/bali.png" />
+                <Image className="rounded-full" src="/bali.png" width={200} height={200}/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Bali</p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <img className="rounded-full" src="/singapore.png" />
+                <Image className="rounded-full" src="/singapore.png" width={200} height={200}/>
               </div>
               <p className="text-center mt-3 text-white font-medium">
                 Singapore
@@ -242,13 +252,13 @@ export default function MainYuk() {
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <img className="rounded-full" src="/agra.png" />
+                <Image className="rounded-full" src="/agra.png" width={200} height={200}/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Agra</p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <img className="rounded-full" src="/sydney.png" />
+                <Image className="rounded-full" src="/sydney.png" width={200} height={200}/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Sydney</p>
             </div>
@@ -261,9 +271,12 @@ export default function MainYuk() {
               <FontAwesomeIcon icon={faChevronRight} width={20} />
             </div>
           </div>
-          <img
+          <Image
             src="/vector_3.png"
             className="absolute bottom-0 z-0 w-1/2 lg:w-1/4"
+            width={100}
+            height={100}
+            alt='plane-bottom-blue'
           />
         </div>
       </div>

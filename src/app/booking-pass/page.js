@@ -7,6 +7,7 @@ import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import React, { useState, useEffect } from 'react';
 import { MyProvider } from '../context/page';
+import Image from 'next/image';
 
 export default function BookingPass() {
   const [token, setToken] = useState(null);
@@ -43,7 +44,7 @@ export default function BookingPass() {
                     />
                   </div>
                 </div>
-                <img src="/eticket.png" className="w-full" />
+                <Image src="/eticket.png" width={1000} height={1000} alt='eticket-logo' className="w-full" />
               </div>
             </div>
           </div>
