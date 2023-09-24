@@ -11,7 +11,7 @@ import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { MyProvider } from '@/app/context/page';
+import { PrivateRoute } from '@/context/page';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -129,7 +129,7 @@ export default function FlightDetail() {
 
   return (
     <>
-      <MyProvider>
+      <PrivateRoute>
         <div className="container w-11/12 mx-auto">{NavbarHandle()}</div>
           <div className="bg-slate-100">
             <div className="custom-background container w-full mx-auto rounded-b-3xl h-auto">
@@ -341,7 +341,7 @@ export default function FlightDetail() {
           </div>
         <Footer />
         <ToastContainer />
-      </MyProvider>
+      </PrivateRoute>
     </>
   );
 }

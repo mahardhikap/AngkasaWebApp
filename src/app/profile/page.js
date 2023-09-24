@@ -14,7 +14,7 @@ import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { MyProvider } from '../context/page';
+import { PrivateRoute } from '../../context/page';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -77,7 +77,7 @@ export default function Profile() {
 
   return (
     <>
-      <MyProvider>
+      <PrivateRoute>
         <div className="w-11/12 container mx-auto">{NavbarHandle()}</div>
         <div className="bg-slate-100 py-20">
           <div className="w-11/12 xl:w-10/12 container mx-auto">
@@ -243,7 +243,7 @@ export default function Profile() {
         </div>
         <Footer />
         <ToastContainer />
-      </MyProvider>
+      </PrivateRoute>
     </>
   );
 }

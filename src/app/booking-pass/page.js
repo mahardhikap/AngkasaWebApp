@@ -6,7 +6,7 @@ import Navbar from '@/app/navbar/page';
 import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import React, { useState, useEffect } from 'react';
-import { MyProvider } from '../context/page';
+import { PrivateRoute } from '../../context/page';
 import Image from 'next/image';
 
 export default function BookingPass() {
@@ -28,7 +28,7 @@ export default function BookingPass() {
 
   return (
     <>
-      <MyProvider>
+      <PrivateRoute>
         <div className="w-11/12 container mx-auto">{NavbarHandle()}</div>
         <div className="bg-slate-200">
           <div className="container mx-auto w-3/4 py-10">
@@ -50,7 +50,7 @@ export default function BookingPass() {
           </div>
         </div>
         <Footer />
-      </MyProvider>
+      </PrivateRoute>
     </>
   );
 }

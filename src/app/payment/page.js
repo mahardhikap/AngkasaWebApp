@@ -7,7 +7,7 @@ import LoginNavbar from '@/app/login-navbar/page';
 import Footer from '@/app/footer/page';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { MyProvider } from '../context/page';
+import { PrivateRoute } from '../../context/page';
 import Image from 'next/image';
 
 export default function Payment() {
@@ -29,7 +29,7 @@ export default function Payment() {
 
   return (
     <>
-      <MyProvider>
+      <PrivateRoute>
         <div className="container w-11/12 mx-auto">{NavbarHandle()}</div>
         <div className="container mx-auto bg-slate-100">
           <div className="w-11/12 sm:w-10/12 md:w-3/4 mx-auto py-20">
@@ -126,7 +126,7 @@ export default function Payment() {
           </div>
         </div>
         <Footer />
-      </MyProvider>
+      </PrivateRoute>
     </>
   );
 }
