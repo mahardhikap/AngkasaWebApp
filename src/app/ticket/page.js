@@ -28,7 +28,7 @@ export default function Ticket() {
   const [filter, setFilter] = useState(null);
   const [reqFacility, setReqFacility] = useState('');
   const [reqAirline, setReqAirline] = useState('');
-  const [reqMinPrice, setReqMinPrice] = useState(0)
+  const [reqMinPrice, setReqMinPrice] = useState(0);
   const facilitiesData = [
     { name: 'baggage', image: '/logo_bag.svg' },
     { name: 'meal', image: '/logo_food.svg' },
@@ -46,7 +46,7 @@ export default function Ticket() {
         }
       );
       setData(response.data.data);
-      console.log('Data:', response.data);
+      console.log('Data:', response.data.data);
       toast.success('Get flight main success!');
     } catch (error) {
       console.error('Error:', error);
@@ -60,7 +60,7 @@ export default function Ticket() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight?facilities=${reqFacility}&airlineId=${reqAirline}&minPrice=${reqMinPrice}&maxPrice=1000`
       );
       setFilter(response.data.data);
-      console.log('Data filter:', response.data);
+      console.log('Data filter:', response.data.data);
       toast.success('Get filter flight success');
     } catch (error) {
       console.error('Error:', error);
@@ -88,10 +88,10 @@ export default function Ticket() {
   }, [reqFacility, reqAirline, reqMinPrice]);
 
   const resetButton = () => {
-    setReqAirline('')
-    setReqFacility('')
-    setReqMinPrice(0)
-  }
+    setReqAirline('');
+    setReqFacility('');
+    setReqMinPrice(0);
+  };
 
   const transitToggle = () => {
     setTransitOpen(!transitOpen);
@@ -157,7 +157,12 @@ export default function Ticket() {
             <div className="col-span-1 mt-10 px-2">
               <div className="font-bold flex justify-between cursor-pointer">
                 <div>Filter</div>
-                <div onClick={() => resetButton()} className='color-ticket hover:text-blue-900'>Reset</div>
+                <div
+                  onClick={() => resetButton()}
+                  className="color-ticket hover:text-blue-900"
+                >
+                  Reset
+                </div>
               </div>
               <div className="grid grid-cols-3 gap-2 mt-4 rounded-lg bg-white p-3">
                 <div className="col-span-3 cursor-pointer">
@@ -466,9 +471,11 @@ export default function Ticket() {
                                 </div>
                               </div>
                               <div className="col-span-1 flex flex-col items-center justify-center">
-                                <button className="px-10 py-3 text-white button-ticket rounded-xl">
-                                  Select
-                                </button>
+                                <Link href={`ticket/${item.code}`}>
+                                  <button className="px-10 py-3 text-white button-ticket rounded-xl">
+                                    Select
+                                  </button>
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -569,9 +576,11 @@ export default function Ticket() {
                                 </div>
                               </div>
                               <div className="col-span-1 flex flex-col items-center justify-center">
+                              <Link href={`ticket/${item.code}`}>
                                 <button className="px-10 py-3 text-white button-ticket rounded-xl">
                                   Select
                                 </button>
+                              </Link>
                               </div>
                             </div>
                           </div>

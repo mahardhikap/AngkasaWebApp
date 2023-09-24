@@ -1,0 +1,14 @@
+.custom-background{
+    background-color: #2395FF;
+}
+.custom-color-grey{
+    color: #9B96AB
+}
+.custom-color-blue{
+    color: #2395FF
+}
+
+input::placeholder {
+    color: #000000; /* Change this to your desired color */
+  }
+  
