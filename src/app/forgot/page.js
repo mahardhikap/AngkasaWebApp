@@ -37,7 +37,7 @@ export default function Register() {
               Send
             </button>
             <div className="my-5">
-              <p className="text-center my-3">You'll get message soon on your email</p>
+              <p className="text-center my-3">You will get message soon on your email</p>
             </div>
           </div>
         </div>

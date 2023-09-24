@@ -33,7 +33,7 @@ export default function Booking() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/users/detail`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -191,7 +191,7 @@ export default function Booking() {
                 </div>
                 <div className="bg-white rounded-xl p-3 mb-4">
                   <div className="text-sm py-2">
-                    Monday, 20 July '20 - 12:33
+                    Monday, 20 July 20 - 12:33
                   </div>
                   <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
                     <div className="font-extrabold">IDN</div>
@@ -227,7 +227,7 @@ export default function Booking() {
                 </div>
                 <div className="bg-white rounded-xl p-3 mb-4">
                   <div className="text-sm py-2">
-                    Monday, 20 July '20 - 12:33
+                    Monday, 20 July 20 - 12:33
                   </div>
                   <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
                     <div className="font-extrabold">IDN</div>
