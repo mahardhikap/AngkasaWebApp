@@ -22,6 +22,7 @@ export default function Register() {
             width={200}
             height={100}
             className="hidden sm:inline md:inline lg:inlin mt-2"
+            alt='image'
           />
           <div className="my-10 sm:my-40">
             <h1 className="font-semibold text-3xl">Forgot Password</h1>

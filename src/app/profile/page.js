@@ -55,7 +55,7 @@ export default function Profile() {
     if (token) {
       getProfile();
     }
-  }, [token]);
+  }, []);
 
   const NavbarHandle = () => {
     if (!token) {

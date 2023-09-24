@@ -57,7 +57,7 @@ export default function Booking() {
     if (token) {
       getProfile();
     }
-  }, [token]);
+  }, []);
 
   const NavbarHandle = () => {
     if (!token) {

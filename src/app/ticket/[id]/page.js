@@ -116,7 +116,7 @@ export default function FlightDetail() {
       getContactDetail()
       getFlightDetail();
     }
-  }, [token]);
+  }, []);
 
   const NavbarHandle = () => {
     if (!token) {

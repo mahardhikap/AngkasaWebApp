@@ -232,19 +232,19 @@ export default function MainMenu() {
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-10 w-fit mx-auto">
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <Image className="rounded-full" src="/paris.png" width={200} height={200}/>
+                <Image className="rounded-full" src="/paris.png" width={200} height={200} alt='img'/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Paris</p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <Image className="rounded-full" src="/bali.png" width={200} height={200}/>
+                <Image className="rounded-full" src="/bali.png" width={200} height={200} alt='img'/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Bali</p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <Image className="rounded-full" src="/singapore.png" width={200} height={200}/>
+                <Image className="rounded-full" src="/singapore.png" width={200} height={200} alt='img'/>
               </div>
               <p className="text-center mt-3 text-white font-medium">
                 Singapore
@@ -252,13 +252,13 @@ export default function MainMenu() {
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <Image className="rounded-full" src="/agra.png" width={200} height={200}/>
+                <Image className="rounded-full" src="/agra.png" width={200} height={200} alt='img'/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Agra</p>
             </div>
             <div className="z-20">
               <div className="rounded-full border-white border-solid border-4 p-2">
-                <Image className="rounded-full" src="/sydney.png" width={200} height={200}/>
+                <Image className="rounded-full" src="/sydney.png" width={200} height={200} alt='img'/>
               </div>
               <p className="text-center mt-3 text-white font-medium">Sydney</p>
             </div>
