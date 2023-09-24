@@ -1,7 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// import { redirect } from 'next/navigation';
 
 const MyContext = createContext();
 
@@ -18,6 +17,7 @@ export function MyProvider({ children }) {
         router.push('/register');
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return (
