@@ -125,7 +125,7 @@ const Modal = ({ buttonLabel }) => {
             <Link href="/ticket">
               <div className="flex flex-row items-center gap-10 p-3 justify-center background-custom rounded-lg mt-4 hover:bg-blue-600 text-white font-bold">
                 <div>Search Flight</div>
-                <div>Logo</div>
+                <div><Image src='/right_arrow_white.svg' width={30} height={30} alt='arrow-right'/></div>
               </div>
             </Link>
           </div>

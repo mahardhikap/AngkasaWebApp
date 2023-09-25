@@ -331,7 +331,7 @@ export default function FlightDetail() {
             <div className="flex items-center justify-center py-20 bg-slate-100">
               <Link href="/payment">
               <button
-              // onClick={()=> postDetailPassenger()}
+              onClick={()=> postDetailPassenger()}
                 className="py-3 px-16 custom-background rounded-xl font-bold text-white"
               >
                 Proceed to Payment

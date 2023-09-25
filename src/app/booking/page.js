@@ -27,23 +27,23 @@ export default function Booking() {
   const router = useRouter();
   const [data, setData] = useState(null);
 
-  const getProfile = async () => {
+  const getBookingDetail = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/users/detail`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/booking/tickets`,
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
       );
       setData(response.data.data);
-      console.log('Data profile:', response.data.data);
-      toast.success('Get detail profile success!');
+      console.log('Data booking:', response.data.data);
+      toast.success('Get detail booking success!');
     } catch (error) {
       console.error('Error:', error);
-      toast.error('Get detail profile failed');
+      toast.error('Get detail booking failed');
     }
   };
 
@@ -55,7 +55,7 @@ export default function Booking() {
 
   useEffect(() => {
     if (token) {
-      getProfile();
+      getBookingDetail();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -100,7 +100,7 @@ export default function Booking() {
                       Select Photo
                     </div>
                     <div className="font-bold text-xl text-center mb-2">
-                      {data ? data?.name : 'Loading...'}
+                      {data ? data?.user?.name : 'Loading...'}
                     </div>
                     <div className="flex items-center flex-row gap-2 mb-4">
                       <div>
@@ -189,80 +189,120 @@ export default function Booking() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-3 mb-4">
-                  <div className="text-sm py-2">
-                    Monday, 20 July 20 - 12:33
-                  </div>
-                  <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
-                    <div className="font-extrabold">IDN</div>
-                    <div>
-                      <Image
-                        src="/small_plane_logo.svg"
-                        width={20}
-                        height={20}
-                        alt="small-plane-logo"
-                      />
-                    </div>
-                    <div className="font-extrabold">JPN</div>
-                  </div>
-                  <div className="text-sm py-2">Garuda Indonesia, AB-221</div>
-                  <div className="grid grid-cols-2">
-                    <div className="flex w-full flex-col md:w-2/3 md:flex-row justify-between">
-                      <div className="font-bold text-sm py-2 text-slate-400">
-                        Status
-                      </div>
-                      <div className="font-bold text-sm py-2 background-waiting p-2 rounded-lg text-white">
-                        Waiting for payment
-                      </div>
-                    </div>
-                    <div className="flex justify-end items-center">
-                      <div className="custom-color font-medium flex flex-row gap-2 items-center">
-                        <div>View Details</div>
-                        <div>
-                          <FontAwesomeIcon icon={faChevronDown} width={20} />
+                {data?.result?.map((item) => {
+                  return (
+                    <>
+                      <div
+                        className="bg-white rounded-xl p-3 mb-4"
+                        key={data?.result?.id}
+                      >
+                        <div className="text-sm py-2">
+                          {new Date(
+                            `${item?.ticket?.takeoff}`
+                          ).toLocaleDateString('id-ID', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}{' '}
+                          -{' '}
+                          {new Date(
+                            `${item?.ticket?.takeoff}`
+                          ).toLocaleTimeString('id-ID', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false,
+                          })}
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-3 mb-4">
-                  <div className="text-sm py-2">
-                    Monday, 20 July 20 - 12:33
-                  </div>
-                  <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
-                    <div className="font-extrabold">IDN</div>
-                    <div>
-                      <Image
-                        src="/small_plane_logo.svg"
-                        width={20}
-                        height={20}
-                        alt="small-plane-logo"
-                      />
-                    </div>
-                    <div className="font-extrabold">JPN</div>
-                  </div>
-                  <div className="text-sm py-2">Garuda Indonesia, AB-221</div>
-                  <div className="grid grid-cols-2">
-                    <div className="flex w-full flex-col md:w-2/3 md:flex-row justify-between">
-                      <div className="font-bold text-sm py-2 text-slate-400">
-                        Status
-                      </div>
-                      <div className="font-bold text-sm py-2 background-issued p-2 rounded-lg text-white">
-                        E-Ticket issued
-                      </div>
-                    </div>
-                    <div className="flex justify-end items-center">
-                      <Link href="/booking-pass">
-                        <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900">
-                          <div>View Details</div>
+                        <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
+                          <div className="font-extrabold">
+                            {item?.ticket?.from?.code}
+                          </div>
                           <div>
-                            <FontAwesomeIcon icon={faChevronDown} width={20} />
+                            <Image
+                              src="/small_plane_logo.svg"
+                              width={20}
+                              height={20}
+                              alt="small-plane-logo"
+                            />
+                          </div>
+                          <div className="font-extrabold">
+                            {item?.ticket?.to?.code}
                           </div>
                         </div>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                        <div className="text-sm py-2">
+                          {item?.ticket?.airline?.name}, AB-221
+                        </div>
+                        <div className="grid grid-cols-2">
+                          <div className="flex w-full flex-col md:w-2/3 md:flex-row justify-between">
+                            <div className="font-bold text-sm py-2 text-slate-400">
+                              Status
+                            </div>
+                            <div className="font-bold text-sm py-2 background-waiting p-2 rounded-lg text-white">
+                              {item?.status?.name}
+                            </div>
+                          </div>
+                          <div className="flex justify-end items-center">
+                            <Link href="/booking-pass">
+                              <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900">
+                                <div>View Details</div>
+                                <div>
+                                  <FontAwesomeIcon
+                                    icon={faChevronDown}
+                                    width={20}
+                                  />
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className="bg-white rounded-xl p-3 mb-4">
+                        <div className="text-sm py-2">
+                          Monday, 20 July 20 - 12:33
+                        </div>
+                        <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
+                          <div className="font-extrabold">IDN</div>
+                          <div>
+                            <Image
+                              src="/small_plane_logo.svg"
+                              width={20}
+                              height={20}
+                              alt="small-plane-logo"
+                            />
+                          </div>
+                          <div className="font-extrabold">JPN</div>
+                        </div>
+                        <div className="text-sm py-2">
+                          Garuda Indonesia, AB-221
+                        </div>
+                        <div className="grid grid-cols-2">
+                          <div className="flex w-full flex-col md:w-2/3 md:flex-row justify-between">
+                            <div className="font-bold text-sm py-2 text-slate-400">
+                              Status
+                            </div>
+                            <div className="font-bold text-sm py-2 background-issued p-2 rounded-lg text-white">
+                              E-Ticket issued
+                            </div>
+                          </div>
+                          <div className="flex justify-end items-center">
+                            <Link href="/booking-pass">
+                              <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900">
+                                <div>View Details</div>
+                                <div>
+                                  <FontAwesomeIcon
+                                    icon={faChevronDown}
+                                    width={20}
+                                  />
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div> */}
+                    </>
+                  );
+                })}
               </div>
             </div>
           </div>
