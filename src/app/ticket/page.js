@@ -220,6 +220,7 @@ export default function Ticket() {
                         type="checkbox"
                         className="ring-2"
                         onClick={() => setReqFacility(1)}
+                        checked={reqFacility === 1}
                       />{' '}
                       Luggage
                     </div>
@@ -228,6 +229,7 @@ export default function Ticket() {
                         type="checkbox"
                         className="ring-2"
                         onClick={() => setReqFacility(2)}
+                        checked={reqFacility === 2}
                       />{' '}
                       In-Flight Meal
                     </div>
@@ -236,6 +238,7 @@ export default function Ticket() {
                         type="checkbox"
                         className="ring-2"
                         onClick={() => setReqFacility(3)}
+                        checked={reqFacility === 3}
                       />{' '}
                       Wi-fi
                     </div>
@@ -322,6 +325,7 @@ export default function Ticket() {
                         type="checkbox"
                         className="ring-2"
                         onClick={() => setReqAirline(2)}
+                        checked={reqAirline === 2}
                       />{' '}
                       Garuda Indonesia
                     </div>
@@ -330,6 +334,7 @@ export default function Ticket() {
                         type="checkbox"
                         className="ring-2"
                         onClick={() => setReqAirline(4)}
+                        checked={reqAirline === 4}
                       />{' '}
                       Air Asia
                     </div>
@@ -338,6 +343,7 @@ export default function Ticket() {
                         type="checkbox"
                         className="ring-2"
                         onClick={() => setReqAirline(3)}
+                        checked={reqAirline === 3}
                       />{' '}
                       Lion Air
                     </div>
