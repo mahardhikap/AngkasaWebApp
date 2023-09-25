@@ -80,9 +80,14 @@ export default function FlightDetail() {
       bodyFormData.append('title1', inputData.title1);
       bodyFormData.append('fullname1', inputData.fullname1);
       bodyFormData.append('nationality1', inputData.nationality1);
+      const urlSearchParams = new URLSearchParams();
+      for (const [key, value] of bodyFormData) {
+        urlSearchParams.append(key, value);
+      }
+  
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/booking/tickets/${id}`,
-        bodyFormData,
+        urlSearchParams.toString(),
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -98,12 +103,14 @@ export default function FlightDetail() {
       toast.error('Post detail passenger failed');
     }
   };
+  
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputData({ ...inputData, [name]: value });
-    console.log(inputData);
   };
+
+  console.log('Input Data:', inputData);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
