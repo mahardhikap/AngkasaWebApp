@@ -51,6 +51,7 @@ export default function Booking() {
     if (typeof window !== 'undefined') {
       setToken(localStorage.getItem('access_token'));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -189,13 +190,10 @@ export default function Booking() {
                     </div>
                   </div>
                 </div>
-                {data?.result?.map((item) => {
+                {data?.result?.map((item, index) => {
                   return (
-                    <>
-                      <div
-                        className="bg-white rounded-xl p-3 mb-4"
-                        key={data?.result?.id}
-                      >
+                    <div key={index}>
+                      <div className="bg-white rounded-xl p-3 mb-4">
                         <div className="text-sm py-2">
                           {new Date(
                             `${item?.ticket?.takeoff}`
@@ -214,9 +212,12 @@ export default function Booking() {
                             hour12: false,
                           })}
                         </div>
-                        <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
+                        <div className="text-lg py-2 w-full sm:w-2/3 flex justify-between items-center">
                           <div className="font-extrabold">
                             {item?.ticket?.from?.code}
+                            <div className="text-xs">
+                              {item?.ticket?.from?.location}
+                            </div>
                           </div>
                           <div>
                             <Image
@@ -228,19 +229,43 @@ export default function Booking() {
                           </div>
                           <div className="font-extrabold">
                             {item?.ticket?.to?.code}
+                            <div className="text-xs">
+                              {item?.ticket?.to?.location}
+                            </div>
                           </div>
+                        </div>
+                        <div>
+                          <Image
+                            src={item?.ticket?.airline?.photo}
+                            width={100}
+                            height={100}
+                            alt="plane-logo"
+                          />
                         </div>
                         <div className="text-sm py-2">
                           {item?.ticket?.airline?.name}, AB-221
                         </div>
                         <div className="grid grid-cols-2">
-                          <div className="flex w-full flex-col md:w-2/3 md:flex-row justify-between">
+                          <div className="flex w-full flex-col sm:flex-row justify-between items-center">
                             <div className="font-bold text-sm py-2 text-slate-400">
                               Status
                             </div>
-                            <div className="font-bold text-sm py-2 background-waiting p-2 rounded-lg text-white">
-                              {item?.status?.name}
-                            </div>
+                              <div
+                                className={`font-bold ${
+                                  item?.status?.id === 1
+                                    ? 'bg-amber-800'
+                                    : item?.status?.id === 2
+                                    ? 'bg-green-800'
+                                    : item?.status?.id === 3
+                                    ? 'bg-red-800'
+                                    : ''
+                                } text-sm py-2 p-2 rounded-lg text-white text-center`}
+                              >
+                                {item?.status?.name}
+                              </div>
+                              <Link href={`/booking/${item?.code}`}>
+                              <div className='font-bold underline'>Proceed to Pay</div>
+                            </Link>
                           </div>
                           <div className="flex justify-end items-center">
                             <Link href="/booking-pass">
@@ -257,50 +282,7 @@ export default function Booking() {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="bg-white rounded-xl p-3 mb-4">
-                        <div className="text-sm py-2">
-                          Monday, 20 July 20 - 12:33
-                        </div>
-                        <div className="text-lg py-2 w-full sm:w-1/3 flex justify-between items-center">
-                          <div className="font-extrabold">IDN</div>
-                          <div>
-                            <Image
-                              src="/small_plane_logo.svg"
-                              width={20}
-                              height={20}
-                              alt="small-plane-logo"
-                            />
-                          </div>
-                          <div className="font-extrabold">JPN</div>
-                        </div>
-                        <div className="text-sm py-2">
-                          Garuda Indonesia, AB-221
-                        </div>
-                        <div className="grid grid-cols-2">
-                          <div className="flex w-full flex-col md:w-2/3 md:flex-row justify-between">
-                            <div className="font-bold text-sm py-2 text-slate-400">
-                              Status
-                            </div>
-                            <div className="font-bold text-sm py-2 background-issued p-2 rounded-lg text-white">
-                              E-Ticket issued
-                            </div>
-                          </div>
-                          <div className="flex justify-end items-center">
-                            <Link href="/booking-pass">
-                              <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900">
-                                <div>View Details</div>
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={faChevronDown}
-                                    width={20}
-                                  />
-                                </div>
-                              </div>
-                            </Link>
-                          </div>
-                        </div>
-                      </div> */}
-                    </>
+                    </div>
                   );
                 })}
               </div>
