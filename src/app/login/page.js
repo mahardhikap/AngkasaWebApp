@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Login() {
   const [errMessage, setErrMessage] = useState('');
@@ -30,15 +31,14 @@ export default function Login() {
           },
         }
       );
-      console.log('Data:', response.data);
-      setErrMessage('')
-      localStorage.setItem("access_token", response.data.data.access_token)
+      setErrMessage('');
+      localStorage.setItem('access_token', response.data.data.access_token);
       toast.success('Login success');
-      setTimeout(()=>{
+      setTimeout(() => {
         router.push('/');
-      },2000)
+      }, 2000);
     } catch (error) {
-      setErrMessage(error)
+      setErrMessage(error);
       console.error('Error:', error);
       toast.error('Login failed');
     }
@@ -72,7 +72,7 @@ export default function Login() {
             width={200}
             height={100}
             className="hidden sm:inline md:inline lg:inlin mt-2"
-            alt='angkasa-logo-small'
+            alt="angkasa-logo-small"
           />
           <div className="my-10 sm:my-40">
             <form onSubmit={postData}>
@@ -120,15 +120,17 @@ export default function Login() {
               </button>
             </form>
             <div className="my-5 text-red-500">
-                <p>{errMessage ? errMessage?.response?.data?.message : ''}</p>
-              </div>
+              <p>{errMessage ? errMessage?.response?.data?.message : ''}</p>
+            </div>
             <div className="my-5">
               <p className="text-center my-3">Did you forgot your password?</p>
             </div>
             <div className="my-5">
-              <p className="text-center my-3 text-color-login">
-                Tap here for reset
-              </p>
+              <Link href={'/forgot'}>
+                <p className="text-center my-3 text-color-login">
+                  Tap here for reset
+                </p>
+              </Link>
             </div>
           </div>
         </div>

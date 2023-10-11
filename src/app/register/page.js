@@ -35,7 +35,6 @@ export default function Register() {
           },
         }
       );
-      console.log('Data:', response.data);
       toast.success('Register success!');
       setTimeout(() => {
         router.push('/verify');

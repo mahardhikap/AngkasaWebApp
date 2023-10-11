@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-export default function completePayment() {
+export default function CompletePayment() {
   const [token, setToken] = useState(null);
   const { id } = useParams();
   const router = useRouter();
@@ -31,10 +31,9 @@ export default function completePayment() {
           },
         }
       );
-      console.log('Sebelum menyimpan data ke payment:', response.data.data);
       setPayment(response.data.data);
     } catch (error) {
-      console.log('terjadi error waktu get', error);
+      console.log('Error when get data', error);
     }
   };
 
@@ -50,8 +49,6 @@ export default function completePayment() {
           },
         }
       );
-      console.log('ini adalah id flight', id);
-      console.log('ini respon change status', response);
       toast.success('Change status success!');
       if (response.status === 200) {
         router.push('/booking');
@@ -65,7 +62,6 @@ export default function completePayment() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedToken = localStorage.getItem('access_token');
-      console.log('Stored Token:', storedToken);
       setToken(storedToken);
     }
   }, []);
@@ -78,7 +74,7 @@ export default function completePayment() {
 
   useEffect(() => {
     if (payment) {
-      console.log('Data ada isinya', payment);
+      console.log('Payment included', payment);
     }
   }, [payment]);
 

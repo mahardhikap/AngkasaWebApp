@@ -37,7 +37,6 @@ export default function Profile() {
         }
       );
       setData(response.data.data);
-      console.log('Data profile:', response.data.data);
       toast.success('Get detail profile success!');
     } catch (error) {
       console.error('Error:', error);
@@ -180,7 +179,7 @@ export default function Profile() {
                         <div className="border-b-2 mb-5">
                           <label className="p-3 text-sm">Email</label>
                           <input
-                            defaultValue={data ? data?.email : 'Loading...'}
+                            defaultValue={data?.email}
                             type="email"
                             className="w-full p-3 outline-none"
                           />
@@ -201,7 +200,7 @@ export default function Profile() {
                         <div className="border-b-2 mb-5">
                           <label className="p-3 text-sm">Fullname</label>
                           <input
-                            defaultValue={data ? data?.name : 'Loading...'}
+                            defaultValue={data?.name}
                             type="text"
                             className="w-full p-3 outline-none"
                           />

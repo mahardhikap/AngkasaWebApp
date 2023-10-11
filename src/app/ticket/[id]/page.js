@@ -40,10 +40,7 @@ export default function FlightDetail() {
           },
         }
       );
-      // console.log('ini token', token);
-      console.log('ini adalah id flight', id);
       setData(response.data.data);
-      console.log('Get contact:', response.data.data);
       toast.success('Get contact detail success');
     } catch (error) {
       console.error('Error:', error);
@@ -62,10 +59,7 @@ export default function FlightDetail() {
           },
         }
       );
-      // console.log('ini token', token);
-      console.log('ini adalah id flight', id);
       setFlight(response.data.data);
-      console.log('Get detail:', response.data.data);
       toast.success('Get detail flight success');
     } catch (error) {
       console.error('Error:', error);
@@ -75,7 +69,6 @@ export default function FlightDetail() {
 
   const postDetailPassenger = async () => {
     try {
-      console.log('Input Data:', inputData);
       let bodyFormData = new FormData();
       bodyFormData.append('title1', inputData.title1);
       bodyFormData.append('fullname1', inputData.fullname1);
@@ -96,7 +89,6 @@ export default function FlightDetail() {
         }
       );
       console.log('Post detail:', response.data);
-      console.log('Post code:', response.data.data.code);
       toast.success('Post detail passenger success');
     } catch (error) {
       console.error('Error:', error);
@@ -109,8 +101,6 @@ export default function FlightDetail() {
     const { name, value } = e.target;
     setInputData({ ...inputData, [name]: value });
   };
-
-  console.log('Input Data:', inputData);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

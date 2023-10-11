@@ -38,13 +38,12 @@ export default function Ticket() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight-all`,
         {
           headers: {
-            'Content-Type': 'application/json', // Set the Content-Type header
+            'Content-Type': 'application/json',
           },
         }
       );
       setData(response.data.data);
       setLoading(false);
-      console.log('Data:', response.data.data);
       toast.success('Get list flight success!');
     } catch (error) {
       console.error('Error:', error);
@@ -58,7 +57,6 @@ export default function Ticket() {
         `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight?facilities=${reqFacility}&airlineId=${reqAirline}&minPrice=${reqMinPrice}&maxPrice=1000`
       );
       setFilter(response.data.data);
-      console.log('Data filter:', response.data.data);
     } catch (error) {
       console.error('Error:', error);
     }

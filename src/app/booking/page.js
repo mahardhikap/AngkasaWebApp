@@ -39,7 +39,6 @@ export default function Booking() {
         }
       );
       setData(response.data.data);
-      console.log('Data booking:', response.data.data);
       toast.success('Get detail booking success!');
     } catch (error) {
       console.error('Error:', error);
