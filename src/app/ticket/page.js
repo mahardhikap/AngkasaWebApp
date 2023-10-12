@@ -11,6 +11,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
 
 export default function Ticket() {
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ export default function Ticket() {
   const [filter, setFilter] = useState(null);
   const [reqFacility, setReqFacility] = useState('');
   const [reqAirline, setReqAirline] = useState('');
-  const [reqMinPrice, setReqMinPrice] = useState(0);
+  const [reqMinPrice, setReqMinPrice] = useState([0, 1000]);
   const facilitiesData = [
     { name: 'baggage', image: '/logo_bag.svg' },
     { name: 'meal', image: '/logo_food.svg' },
@@ -54,7 +56,7 @@ export default function Ticket() {
   const getFilteredFlight = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight?facilities=${reqFacility}&airlineId=${reqAirline}&minPrice=${reqMinPrice}&maxPrice=1000`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/airlines/flight?facilities=${reqFacility}&airlineId=${reqAirline}&minPrice=${reqMinPrice[0]}&maxPrice=${reqMinPrice[1]}`
       );
       setFilter(response.data.data);
     } catch (error) {
@@ -85,7 +87,7 @@ export default function Ticket() {
   const resetButton = () => {
     setReqAirline('');
     setReqFacility('');
-    setReqMinPrice(0);
+    setReqMinPrice([0,1000]);
   };
 
   const transitToggle = () => {
@@ -107,10 +109,10 @@ export default function Ticket() {
     setTicketOpen(!ticketOpen);
   };
 
-  const handleSliderChange = (e) => {
-    const newValue = parseFloat(e.target.value);
-    setReqMinPrice(newValue);
-  };
+  // const handleSliderChange = (e) => {
+  //   const newValue = parseFloat(e.target.value);
+  //   setReqMinPrice(newValue);
+  // };
 
   return (
     <>
@@ -345,6 +347,24 @@ export default function Ticket() {
                       />{' '}
                       Lion Air
                     </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqAirline(5)}
+                        checked={reqAirline === 5}
+                      />{' '}
+                      City Link
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        className="ring-2"
+                        onClick={() => setReqAirline(1)}
+                        checked={reqAirline === 1}
+                      />{' '}
+                      Singapore Airlines
+                    </div>
                   </details>
 
                   <hr className="my-2" />
@@ -363,19 +383,20 @@ export default function Ticket() {
                         )}
                       </span>
                     </summary>
-                    <div className="range-slider">
-                      <input
-                        type="range"
-                        min={0}
-                        max={1000}
-                        step={0.01}
-                        value={reqMinPrice}
-                        onChange={handleSliderChange}
-                      />
+                    <div className="flex flex-row justify-between">
+                      <div>Min</div>
+                      <div>Max</div>
                     </div>
-                    <div>
-                      Min Price: ${reqMinPrice.toFixed(2)} - Max Price: $1000
+                    <div className="flex flex-row justify-between mb-2">
+                      <div>${reqMinPrice[0]}</div>
+                      <div>${reqMinPrice[1]}</div>
                     </div>
+                    <RangeSlider
+                      min={0}
+                      max={1000}
+                      value={reqMinPrice}
+                      onInput={setReqMinPrice}
+                    />
                   </details>
                 </div>
               </div>
@@ -385,10 +406,7 @@ export default function Ticket() {
                 <Link href="flight-detail">
                   <div>Select Ticket</div>
                 </Link>
-                <div
-                  onClick={() => sortButton()}
-                  className="color-ticket hover:text-blue-900 cursor-pointer"
-                >
+                <div className="color-ticket hover:text-blue-900 cursor-pointer">
                   Sort
                 </div>
               </div>

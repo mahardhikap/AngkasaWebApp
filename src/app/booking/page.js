@@ -21,6 +21,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
+import Swal from 'sweetalert2';
 
 export default function Booking() {
   const [token, setToken] = useState(null);
@@ -39,6 +40,7 @@ export default function Booking() {
         }
       );
       setData(response.data.data);
+      console.log(response.data.data)
       toast.success('Get detail booking success!');
     } catch (error) {
       console.error('Error:', error);
@@ -76,6 +78,14 @@ export default function Booking() {
       return localStorage.clear();
     }
   };
+
+  const notPaid = (code) => {
+    Swal.fire(
+      'Please pay the ticket first!',
+      '',
+      'error'
+    ).then(()=>router.push(`/booking/${code}`))
+  }
 
   return (
     <>
@@ -258,18 +268,19 @@ export default function Booking() {
                                     : item?.status?.id === 3
                                     ? 'bg-red-800'
                                     : ''
-                                } text-sm py-2 p-2 rounded-lg text-white text-center`}
+                                } text-sm py-2 px-2 rounded-lg text-white text-center`}
                               >
                                 {item?.status?.name}
                               </div>
                               <Link href={`/booking/${item?.code}`}>
-                              <div className='font-bold underline'>Proceed to Pay</div>
+                              <div className='font-bold text-sm py-2 px-2 rounded-lg text-white text-center bg-blue-400'>Proceed to Pay</div>
                             </Link>
                           </div>
                           <div className="flex justify-end items-center">
-                            <Link href="/booking-pass">
+                            {item?.status?.id === 2 ? (
+                            <Link href={`/booking-pass/${item.code}`}>
                               <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900">
-                                <div>View Details</div>
+                                <div>Ticket Details</div>
                                 <div>
                                   <FontAwesomeIcon
                                     icon={faChevronDown}
@@ -278,6 +289,17 @@ export default function Booking() {
                                 </div>
                               </div>
                             </Link>
+                            ) : (
+                              <div className="custom-color font-medium flex flex-row gap-2 items-center hover:text-blue-900" onClick={()=>notPaid(item.code)}>
+                                <div>Ticket Details</div>
+                                <div>
+                                  <FontAwesomeIcon
+                                    icon={faChevronDown}
+                                    width={20}
+                                  />
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
