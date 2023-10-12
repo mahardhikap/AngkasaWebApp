@@ -2,10 +2,10 @@
 # Recipe Web App
 <div align="center">
 <a href="https://github.com/mahardhikap/RecipeMobileApp">
-    <img src="https://i.ibb.co/ZcsX3g3/fix.png" alt="Logo" width="150" height="150">
+    <img src="https://i.ibb.co/WVRmCWV/Ankasa-Logo.png" alt="Logo" width="150" height="150">
 </a>
 <p style="text-align: center;">
-    <span style="font-weight: bold; font-size: 30px; color: #EFC81A;">Mama Recipe</span>
+    <span style="font-weight: bold; font-size: 30px; color: #2395FF;">Ankasa Ticket Flight</span>
 </p>
 </div>
 
@@ -34,18 +34,6 @@ Key Features:
 Prepare to transform your travel experience with Ankasa Flight! Explore our website today and embark on your journey with the world's finest flight options.
 
 ## Built with
-
-
-
-    "next": "13.4.19",
-    "postcss": "8.4.29",
-    "react": "18.2.0",
-    "react-barcode": "^1.4.6",
-    "react-dom": "18.2.0",
-    "react-range-slider-input": "^3.0.7",
-    "react-toastify": "^9.1.3",
-    "sweetalert2": "^11.7.32",
-    "tailwindcss": "3.3.3"
     
 - [**Next 13.4.19**](https://nextjs.org/docs)
 - [**Axios 1.5.0**](https://axios-http.com/docs/intro)
